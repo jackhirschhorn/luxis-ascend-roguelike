@@ -11,7 +11,7 @@ public class ability : ScriptableObject
 	public int difficulty;
 	public resourceopt[] costs = new resourceopt[0];
 	
-	public virtual bool callability(charactersheet cs, int level, int vari, int dice){
+	public virtual bool callability(charactersheet cs, charactersheet targ, int level, int vari, int dice){
 		foreach(resourceopt ro in costs){
 			if(!cs.docost(ro,level,true))return false;
 		}
