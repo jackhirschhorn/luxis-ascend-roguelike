@@ -8,6 +8,7 @@ public class master : MonoBehaviour
     public static master MR;
 	public int state = 0;//0 = move, 1 = item
 	public UnityEvent clickevent;
+	public LayerMask wallonlymask;
 	
 	public void Awake(){
 		MR = this;
@@ -26,5 +27,18 @@ public class master : MonoBehaviour
 	
 	public void button(){
 		Debug.Log("Ye");
+	}
+	
+	public void dropgold(int i, Vector3 pos){
+		//todo
+	}
+	
+	public void droploot(Transform[] loot, Vector3 pos){
+		//todo
+	}
+	
+	public bool additem(Transform itm){
+		//todo
+		return false;
 	}
 }

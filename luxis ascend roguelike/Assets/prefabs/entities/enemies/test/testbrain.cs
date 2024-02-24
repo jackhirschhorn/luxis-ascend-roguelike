@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class entity : MonoBehaviour
+[CreateAssetMenu(fileName ="testbrain")]
+public class testbrain : brain
 {
-    public int hp, chp, mana, cmana;
+    
 }
