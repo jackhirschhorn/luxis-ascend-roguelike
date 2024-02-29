@@ -12,3 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64bd60c2def48dc4c92e7d5da4db1371, type: 3}
   m_Name: testbrain
   m_EditorClassIdentifier: 
+  targ: {fileID: 0}
+  vtarg: {x: 0, y: 0, z: 0}
+  state: 0
+  sens:
+  - {fileID: 11400000, guid: 68ccdfd169414f74b93a4210299cf49f, type: 2}
+  atks: []
+  pf: {fileID: 11400000, guid: 6994a96738aeb644aa6c0294e8ea0e0a, type: 2}
+  me: {fileID: 0}
+  hit: {fileID: 0}

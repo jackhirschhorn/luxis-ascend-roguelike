@@ -13,7 +13,7 @@ public class brain : ScriptableObject
 	public entity me;
 	public attack hit = null;
 	
-	public virtual void doturn(){
+	public virtual void doturn(int indx){
 		switch(state){
 			case 0: //search
 				foreach(sense s in sens){
@@ -24,7 +24,7 @@ public class brain : ScriptableObject
 					state = 1;
 					//play alert animation
 				} else {
-					me.move(pf.wander(me));
+					me.move(pf.wander(me),indx);
 				}
 			break;
 			case 1: //target found
@@ -38,7 +38,7 @@ public class brain : ScriptableObject
 					state = 2;
 					break;
 				} else { //an attack cannot hit the target
-					me.move(pf.findpath(targ, me));
+					me.move(pf.findpath(targ, me),indx);
 					break;
 				}
 			break;

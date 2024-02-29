@@ -9,14 +9,16 @@ public class enemy : entity
 	public Transform[] loot = new Transform[0];
 	public int gold;
 	
-	public virtual void takedamage(int dam, int peirce){
-		hp -= Mathf.Max(dam-(Mathf.Max(armor-peirce,0)),0);
-	}
+	public virtual void Awake(){
+		brn = Instantiate(brn);
+		brn.me = this;
+	}	
 	
-	public virtual void die(){
+	public override void die(){
 		master.MR.dropgold(gold,transform.position);
 		master.MR.droploot(loot,transform.position);
 		//death animation
 		Destroy(this.gameObject);
 	}
+	
 }

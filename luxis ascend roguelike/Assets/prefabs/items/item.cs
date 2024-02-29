@@ -8,7 +8,7 @@ public class item : MonoBehaviour
     public string nme;
 	public int damage = 0;
 	public int durability = 0;
-	public UnityEvent thisevent;
+	public UEvent thisevent;
 	
 	public void removedurability(int i){
 		if(durability != -1){
@@ -28,9 +28,13 @@ public class item : MonoBehaviour
 		master.MR.clickevent = thisevent;
 	}
 	
-	public void punch(){
+	public void punch(Transform t){
 		Debug.Log("punch!");
+		foreach(Transform t2 in master.MR.entrans){
+			if(Vector3.Distance(t.position, t2.position) <= 0.1f)t2.GetComponent<entity>().takedamage(1,0);
+		}
 		master.MR.state = 0;
 		master.MR.clickevent = null;
+		master.MR.doenemyturn(0);
 	}
 }
