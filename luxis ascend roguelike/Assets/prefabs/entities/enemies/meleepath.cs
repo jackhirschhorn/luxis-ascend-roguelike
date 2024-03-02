@@ -6,7 +6,8 @@ using UnityEngine;
 public class meleepath : pathfinder
 {
     public override Vector3 findpath(entity e, entity me){
-		return Vector3.zero;
+		//debug
+		return wander(me);
 	}
 	
 	public override Vector3 wander(entity me){		

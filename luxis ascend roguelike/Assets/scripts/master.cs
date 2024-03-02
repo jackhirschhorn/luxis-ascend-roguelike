@@ -9,6 +9,8 @@ public class master : MonoBehaviour
 	public int state = 0;//0 = move, 1 = item
 	public UEvent clickevent;
 	public LayerMask wallonlymask;
+	//public List<AtkEvent> atackqueue = new List<AtkEvent>();
+	
 	
 	public void Awake(){
 		MR = this;
@@ -50,11 +52,21 @@ public class master : MonoBehaviour
 	
 	public IEnumerator doenemyturn2(int i){
 		yield return new WaitForEndOfFrame();
-		if(i < entrans.childCount)entrans.GetChild(i).GetComponent<enemy>().brn.doturn(i);
+		if(i < entrans.childCount){entrans.GetChild(i).GetComponent<enemy>().brn.doturn(i);
+		} else {
+			//foreach(AtkEvent ae in atackqueue){
+				//ae.Invoke();
+			//} not workin
+		}
 	}
 }
 
 [System.Serializable]
 public class UEvent : UnityEvent<Transform>
+{
+}
+
+[System.Serializable]
+public class AtkEvent : UnityEvent<Vector3,entity>
 {
 }

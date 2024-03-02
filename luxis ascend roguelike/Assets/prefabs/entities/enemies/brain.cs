@@ -13,6 +13,12 @@ public class brain : ScriptableObject
 	public entity me;
 	public attack hit = null;
 	
+	public void Awake(){
+		for(int i = 0; i < atks.Length; i++){
+			atks[i] = Instantiate(atks[i]);
+		}
+	}
+	
 	public virtual void doturn(int indx){
 		switch(state){
 			case 0: //search
@@ -23,6 +29,8 @@ public class brain : ScriptableObject
 				if(targ != null){
 					state = 1;
 					//play alert animation
+					me.anim.SetBool("suprise",true);
+					master.MR.doenemyturn(indx+1);
 				} else {
 					me.move(pf.wander(me),indx);
 				}
@@ -36,6 +44,7 @@ public class brain : ScriptableObject
 					hit.demoatk(targ, me);
 					vtarg = targ.transform.position;
 					state = 2;
+					master.MR.doenemyturn(indx+1);
 					break;
 				} else { //an attack cannot hit the target
 					me.move(pf.findpath(targ, me),indx);
@@ -43,8 +52,11 @@ public class brain : ScriptableObject
 				}
 			break;
 			case 2: //launch attack
+				//master.MR.atackqueue.Add(hit.doatk(vtarg, me));
 				hit.doatk(vtarg, me);
+				master.MR.doenemyturn(indx+1);
 				state = 1;
+				hit = null;
 			break;
 		}
 	}

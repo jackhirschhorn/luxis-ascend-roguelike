@@ -13,6 +13,6 @@ public class attack : ScriptableObject
 	}
 	
 	public virtual void doatk(Vector3 targ, entity me){
-		
+
 	}
 }
