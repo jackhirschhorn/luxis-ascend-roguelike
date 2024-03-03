@@ -11,7 +11,7 @@ public class itementity : MonoBehaviour
 	public virtual void pickup(){
 		if(isgold){
 			player.pc.gold += goldvalue;
-			Destroy(this.gameObject);
+			Destroy(transform.parent.parent.gameObject);
 		} else {
 			if(master.MR.additem(itm)){ //only if we actually pick it up
 				Destroy(this.gameObject);
@@ -20,7 +20,7 @@ public class itementity : MonoBehaviour
 	}
 	
 	public void OnTriggerEnter(Collider col){
-		if(col.transform.GetComponent<player>()){
+		if(col.tag == "Player"){
 			pickup();
 		}
 	}
