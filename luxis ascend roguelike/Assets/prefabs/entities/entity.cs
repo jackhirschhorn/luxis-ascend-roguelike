@@ -61,8 +61,8 @@ public class entity : MonoBehaviour
 	
 	
 	public virtual void takedamage(int dam, int peirce){
-		hp -= Mathf.Max(dam-(Mathf.Max(armor-peirce,0)),0);
-		if(hp <= 0)die();
+		chp -= Mathf.Max(dam-(Mathf.Max(armor-peirce,0)),0);
+		if(chp <= 0)die();
 	}
 	
 	public virtual void die(){
