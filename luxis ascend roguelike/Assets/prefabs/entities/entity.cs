@@ -10,15 +10,15 @@ public class entity : MonoBehaviour
 	public Animator anim;
 	
 	public bool moving = false;
-	public virtual void move(Transform t, int indx){
+	public virtual void move(Transform t, int indx){ //player move
 		if(Vector3.Distance(transform.position,t.position) < 1.67f){
 			moving = true;
 			anim.SetBool("move", true);
-			StartCoroutine(move2(t,indx));
+			StartCoroutine(move2(t,indx)); //move over time
 		}
 	}
 	
-	public virtual void move(Vector3 v, int indx){
+	public virtual void move(Vector3 v, int indx){ //npc move
 		moving = true;
 		anim.SetBool("move", true);
 		StartCoroutine(move2(v,indx));
@@ -37,9 +37,9 @@ public class entity : MonoBehaviour
 		movetimer = 0f;
 		transform.position = t.position;
 		moving = false;		
-		if(player.pc == this){master.MR.doenemyturn(0);
+		if(player.pc == this){master.MR.doenemyturn(0); //do enemy turns
 		} else {			
-			master.MR.doenemyturn(indx+1);
+			master.MR.doenemyturn(indx+1); //do next enemy turn in sequence
 		}
 	}
 	
@@ -53,9 +53,9 @@ public class entity : MonoBehaviour
 		movetimer = 0f;
 		transform.position = v;
 		moving = false;
-		if(player.pc == this){master.MR.doenemyturn(0);
+		if(player.pc == this){master.MR.doenemyturn(0); //do enemy turns
 		} else {			
-			master.MR.doenemyturn(indx+1);
+			master.MR.doenemyturn(indx+1); //do next enemy turn in sequence
 		}
 	}
 	

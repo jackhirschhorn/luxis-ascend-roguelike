@@ -11,13 +11,15 @@ public class master : MonoBehaviour
 	public UEvent clickevent;
 	public LayerMask wallonlymask;
 	public RectTransform hpscaler, manascaler;
-	public TextMeshProUGUI hptxt, manatxt;
+	public TextMeshProUGUI hptxt, manatxt, goldcounter;
 	
-	public void FixedUpdate(){
+	public void FixedUpdate(){ 
+		//updates the UI to display players current HP, mana, and gold
 		hptxt.text =""+ player.pc.chp;
 		hpscaler.anchorMin = new Vector2(hpscaler.anchorMin.x, (player.pc.hp+0f)/(player.pc.chp+0f));
 		manatxt.text =""+ player.pc.cmana;
 		manascaler.anchorMin = new Vector2(manascaler.anchorMin.x, (player.pc.mana+0f)/(player.pc.cmana+0f));
+		goldcounter.text = ""+ player.pc.gold;
 	}
 	
 	public void Awake(){
