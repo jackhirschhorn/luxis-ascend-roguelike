@@ -29,12 +29,12 @@ public class brain : ScriptableObject
 				if(targ != null){
 					state = 1;
 					//play alert animation
-					me.anim.SetBool("suprise",true);
+					me.anim.SetBool("suprise",true);					
 					master.MR.doenemyturn(indx+1);
 				} else {
 					me.move(pf.wander(me),indx);
 				}
-			break;
+				break;
 			case 1: //target found
 				foreach(attack a in atks){
 					if(a.atkcheck(targ, me))hit = a;
@@ -43,20 +43,33 @@ public class brain : ScriptableObject
 				if(hit != null){ //an attack can hit the target
 					hit.demoatk(targ, me);
 					vtarg = targ.transform.position;
-					state = 2;
+					state = 2;				
 					master.MR.doenemyturn(indx+1);
 					break;
 				} else { //an attack cannot hit the target
 					me.move(pf.findpath(targ, me),indx);
 					break;
 				}
-			break;
-			case 2: //launch attack
-				//master.MR.atackqueue.Add(hit.doatk(vtarg, me));
-				hit.doatk(vtarg, me);
+				break;
+			default:
 				master.MR.doenemyturn(indx+1);
+			break;
+		}
+	}
+	
+	public virtual void doatkturn(int indx){
+		switch(state){
+			case 2:
+				state = 3;				
+				master.MR.doenemyturnatk(indx+1);
+				break;
+			case 3: //launch attack
+				hit.doatk(vtarg, me, indx);
 				state = 1;
 				hit = null;
+				break;			
+			default:
+			master.MR.doenemyturnatk(indx+1);
 			break;
 		}
 	}

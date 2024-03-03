@@ -21,11 +21,14 @@ public class testatk : attack
 		visuse.position = targ.transform.position+new Vector3(0,0.1f,0);
 	}
 	
-	public override void doatk(Vector3 targ, entity me){
+	public override IEnumerator doatk2(Vector3 targ, entity me, int indx){
 		foreach(Transform t2 in master.MR.entrans){
 			if(Vector3.Distance(targ, t2.position) <= 0.1f)t2.GetComponent<entity>().takedamage(1,0);
 		}
 		if(Vector3.Distance(targ, player.pc.transform.position) <= 0.1f)player.pc.takedamage(1,0);
 		Destroy(visuse.gameObject);
+		me.anim.SetBool("attack",true);
+		yield return new WaitUntil(() => !me.anim.GetBool("attack"));
+		master.MR.doenemyturnatk(indx+1);
 	}
 }

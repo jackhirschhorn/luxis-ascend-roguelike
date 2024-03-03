@@ -12,7 +12,11 @@ public class attack : ScriptableObject
 		
 	}
 	
-	public virtual void doatk(Vector3 targ, entity me){
-
+	public virtual void doatk(Vector3 targ, entity me, int indx){
+		me.StartCoroutine(doatk2(targ,me,indx));
+	}
+	
+	public virtual IEnumerator doatk2(Vector3 targ, entity me, int indx){
+		yield return new WaitForEndOfFrame();
 	}
 }
