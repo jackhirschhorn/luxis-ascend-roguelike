@@ -16,7 +16,6 @@ MonoBehaviour:
   vtarg: {x: 0, y: 0, z: 0}
   state: 0
   sens:
-  - {fileID: 11400000, guid: 68ccdfd169414f74b93a4210299cf49f, type: 2}
   - {fileID: 11400000, guid: e75af82d2f076a64a998b053c1fd2a90, type: 2}
   atks:
   - {fileID: 11400000, guid: 555ccf34478704649b68bb32bf3a9a1b, type: 2}

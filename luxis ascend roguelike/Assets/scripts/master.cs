@@ -26,6 +26,12 @@ public class master : MonoBehaviour
 		MR = this;
 	}
 	
+	public void Start(){
+		for(int i = 0; i < player.pc.inventorysize; i++){
+			addinvitem();
+		}
+	}
+	
 	public void tileclick(Transform t){
 		//changes based on states
 		if(!player.pc.moving){
@@ -77,6 +83,23 @@ public class master : MonoBehaviour
 		if(i < entrans.childCount){
 			entrans.GetChild(i).GetComponent<enemy>().brn.doatkturn(i);
 		}
+	}
+	
+	public Transform invitempre;
+	public Transform inv;
+	
+	public void addinvitem(){
+		RectTransform clone = Instantiate(invitempre as RectTransform);
+		clone.parent = inv;
+		int temp = inv.childCount+1;
+		for(int i = 0; i < inv.childCount; i++){
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
+		}
+		
+	}
+	
+	public void removeinvitem(){
+		
 	}
 }
 

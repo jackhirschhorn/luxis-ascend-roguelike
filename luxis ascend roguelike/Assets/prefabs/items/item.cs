@@ -23,6 +23,14 @@ public class item : MonoBehaviour
 		Debug.Log(nme + " broke!");
 	}
 	
+	public void ondrag(){
+		Debug.Log("ye");
+	}
+	
+	public void enddrag(){
+		Debug.Log("ne");
+	}
+	
 	public void dothething(){
 		master.MR.state = 1;
 		master.MR.clickevent = thisevent;
