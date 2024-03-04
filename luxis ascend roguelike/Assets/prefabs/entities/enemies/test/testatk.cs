@@ -14,11 +14,11 @@ public class testatk : attack
 		return false;
 	}
 	
-	public Transform vis;
-	public Transform visuse;
+	public Transform vis; //the asset we use
+	public Transform visuse; //the reference to the asset after spawned
 	public override void demoatk(entity targ, entity me){
-		visuse = Instantiate(vis);
-		visuse.position = targ.transform.position+new Vector3(0,0.1f,0);
+		visuse = Instantiate(vis); //spawn the asset
+		visuse.position = targ.transform.position+new Vector3(0,0.1f,0); //place the asset at the indicated location (and slightly up so it doesn't Z-clip)
 	}
 	
 	public override IEnumerator doatk2(Vector3 targ, entity me, int indx){
