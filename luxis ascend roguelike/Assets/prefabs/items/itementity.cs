@@ -13,15 +13,23 @@ public class itementity : MonoBehaviour
 			player.pc.gold += goldvalue;
 			Destroy(transform.parent.parent.gameObject);
 		} else {
-			if(master.MR.additem(itm)){ //only if we actually pick it up
-				Destroy(this.gameObject);
-			}
+			master.MR.showitem(itm, this.transform);
 		}
+	}
+	
+	public virtual void hide(){
+		master.MR.hideitem(itm, this.transform);
 	}
 	
 	public void OnTriggerEnter(Collider col){
 		if(col.tag == "Player"){
 			pickup();
+		}
+	}
+	
+	public void OnTriggerExit(Collider col){
+		if(col.tag == "Player"){
+			hide();
 		}
 	}
 }

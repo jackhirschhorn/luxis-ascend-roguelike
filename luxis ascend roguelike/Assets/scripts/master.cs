@@ -32,7 +32,7 @@ public class master : MonoBehaviour
 	
 	public void Start(){
 		for(int i = 0; i < player.pc.inventorysize; i++){
-			addinvitem();
+			addinvitem(true);
 		}
 	}
 	
@@ -41,6 +41,7 @@ public class master : MonoBehaviour
 		if(!player.pc.moving){
 			if(state == 0){
 				player.pc.move(t,0);
+				itmindx = 0;
 			} else if(state == 1){
 				clickevent.Invoke(t);
 			}
@@ -105,6 +106,17 @@ public class master : MonoBehaviour
 		
 	}
 	
+	public void addinvitem(bool b){
+		RectTransform clone = Instantiate(invitempre as RectTransform);
+		clone.parent = inv;
+		int temp = inv.childCount+1;
+		for(int i = inv.childCount-1; i > -1; i--){
+			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
+		}
+		
+	}
+	
 	public IEnumerator animateinv(RectTransform rt, Vector2 v, int i){
 		yield return new WaitForSeconds(i*0.02f);
 		Vector2 temp = rt.anchoredPosition;
@@ -126,6 +138,27 @@ public class master : MonoBehaviour
 	
 	public void removeinvitem(){
 		
+	}
+	
+	public Transform worlditemholder;
+	public int itmindx = 0;
+	
+	public void showitem(Transform itm, Transform itment){
+		itm.parent = worlditemholder;
+		if(itmindx == 0){
+			itm.gameObject.SetActive(true);
+			itm.GetComponent<item>().visindx = itmindx;
+			Debug.Log(Camera.main.ScreenToWorldPoint(itment.position));
+			(itm as RectTransform).anchoredPosition = (Vector2)Camera.main.WorldToScreenPoint(itment.position);
+		} else {
+			
+		}
+		itmindx++;		
+	}
+	
+	public void hideitem(Transform itm, Transform itment){
+		itm.parent = itment.parent;
+		itm.gameObject.SetActive(false);
 	}
 }
 
