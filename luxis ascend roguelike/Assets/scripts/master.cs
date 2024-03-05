@@ -22,6 +22,10 @@ public class master : MonoBehaviour
 		goldcounter.text = ""+ player.pc.gold;
 	}
 	
+	public void Update(){
+		if(Input.GetKeyDown(KeyCode.Space))addinvitem();
+	}
+	
 	public void Awake(){
 		MR = this;
 	}
@@ -92,10 +96,32 @@ public class master : MonoBehaviour
 		RectTransform clone = Instantiate(invitempre as RectTransform);
 		clone.parent = inv;
 		int temp = inv.childCount+1;
-		for(int i = 0; i < inv.childCount; i++){
-			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
+		clone.anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),58);
+		StartCoroutine(animateinv(clone,new Vector2(Screen.width*((temp-1f)/temp),58),0));
+		for(int i = inv.childCount-2; i > -1; i--){
+			StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
+			//(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
 		}
 		
+	}
+	
+	public IEnumerator animateinv(RectTransform rt, Vector2 v, int i){
+		yield return new WaitForSeconds(i*0.02f);
+		Vector2 temp = rt.anchoredPosition;
+		Vector2 rbr = Vector2.LerpUnclamped(temp,v,1.1f); //rubber band the animation slightly
+		float timer = 0;
+		while(timer <= 1){
+			rt.anchoredPosition = Vector2.Lerp(temp,rbr,timer);
+			yield return new WaitForEndOfFrame();
+			timer += Time.deltaTime*3;			
+		}
+		timer = 0;
+		while (timer <= 1){
+			rt.anchoredPosition = Vector2.Lerp(rbr,v,timer);
+			yield return new WaitForEndOfFrame();
+			timer += Time.deltaTime*5;		
+		}
+		rt.anchoredPosition = v;
 	}
 	
 	public void removeinvitem(){
