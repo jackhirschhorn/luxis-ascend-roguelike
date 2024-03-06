@@ -51,12 +51,42 @@ public class master : MonoBehaviour
 		Debug.Log("Ye");
 	}
 	
+	public Transform itementholder;
+	
+	public Transform gold1, gold10, gold100;
+	
 	public void dropgold(int i, Vector3 pos){
-		//todo
+		Transform clone;
+		while(i >= 100){
+			clone = Instantiate(gold100);
+			clone.parent = itementholder;
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.rotation = Random.rotation;
+			i -= 100;
+		}
+		while(i >= 10){
+			clone = Instantiate(gold10);
+			clone.parent = itementholder;
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.rotation = Random.rotation;
+			i -= 10;
+		}
+		while(i >= 1){
+			clone = Instantiate(gold1);
+			clone.parent = itementholder;
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.rotation = Random.rotation;
+			i--;
+		}
 	}
 	
 	public void droploot(Transform[] loot, Vector3 pos){
-		//todo
+		foreach(Transform t in loot){
+			Transform clone = Instantiate(t);
+			clone.parent = itementholder;
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f+0.5f,Random.Range(-10,10)*0.03f);
+			clone.GetChild(1).rotation = Random.rotation;
+		}
 	}
 	
 	public bool additem(Transform itm){

@@ -286,6 +286,10 @@ MonoBehaviour:
   hptxt: {fileID: 1258735724}
   manatxt: {fileID: 1731599544}
   goldcounter: {fileID: 277953810}
+  itementholder: {fileID: 1787325089}
+  gold1: {fileID: 7161372531004344611, guid: f51c877280c26844eaf661b03335dd8a, type: 3}
+  gold10: {fileID: 0}
+  gold100: {fileID: 0}
   entrans: {fileID: 915943457}
   invitempre: {fileID: 293322266329100653, guid: e92b4eb62347bbb42a4abb91f8b0bf93, type: 3}
   inv: {fileID: 846234624}
