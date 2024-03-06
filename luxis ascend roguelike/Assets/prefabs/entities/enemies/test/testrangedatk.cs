@@ -38,7 +38,7 @@ public class testrangedatk : attack
 					i = visuse.Count;
 				}
 			}
-			if(Vector3.Distance(visuse[i].position, player.pc.transform.position) <= 0.1f){
+			if(i < visuse.Count && Vector3.Distance(visuse[i].position, player.pc.transform.position) <= 0.1f){
 				i = visuse.Count;
 				player.pc.takedamage(1,0);
 			}
@@ -46,9 +46,16 @@ public class testrangedatk : attack
 		for (int i = visuse.Count - 1; i >= 0; i--){
 			Destroy(visuse[i].gameObject);
 		}
+		visuse.Clear();
 		//Destroy(visuse.gameObject);
 		me.anim.SetBool("attack",true);
 		yield return new WaitUntil(() => !me.anim.GetBool("attack"));
 		master.MR.doenemyturnatk(indx+1);
+	}
+	
+	public override void clearattack(){
+		for (int i = visuse.Count - 1; i >= 0; i--){
+			if(visuse[i]!= null)Destroy(visuse[i].gameObject);
+		}
 	}
 }

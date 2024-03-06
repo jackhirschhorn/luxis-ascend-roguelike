@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class item : MonoBehaviour
 {
@@ -9,7 +10,13 @@ public class item : MonoBehaviour
 	public int damage = 0;
 	public int durability = 0;
 	public int goldcost = 0;
+	public itementity itmref;
+	public Sprite icon, blank;
 	public UEvent thisevent;
+	
+	public void Awake(){
+		if(icon == null)icon = transform.GetComponent<Image>().sprite;
+	}
 	
 	public virtual void removedurability(int i){
 		if(durability != -1){
@@ -25,16 +32,52 @@ public class item : MonoBehaviour
 	}
 	
 	public void ondrag(){
-		Debug.Log("ye");
+		if(nme != ""){
+			transform.GetComponent<Image>().sprite = blank;
+			master.MR.itemup = this;
+		}
 	}
 	
 	public void enddrag(){
-		Debug.Log("ne");
+		if(nme != ""){
+			transform.GetComponent<Image>().sprite = icon;
+			master.MR.pickup();
+			StartCoroutine(enddrag2());
+		}
+	}
+	
+	public IEnumerator enddrag2(){
+		yield return new WaitForEndOfFrame();
+		yield return new WaitForEndOfFrame();
+		master.MR.itemup = null;
+	}
+	
+	public void pickup_itemcall(){
+		if(transform.GetComponent<Animator>().GetBool("ye") && transform.parent == master.MR.inv)StartCoroutine(pickup2());
+	}
+	
+	public IEnumerator pickup2(){
+		yield return new WaitForEndOfFrame();
+		if(master.MR.itemup != null){
+			Transform clone = Instantiate(master.MR.itemup.transform);
+			clone.parent = transform.parent;
+			clone.SetSiblingIndex(this.transform.GetSiblingIndex()+1);
+			(clone as RectTransform).anchoredPosition = (this.transform as RectTransform).anchoredPosition;
+			Destroy(master.MR.itemup.itmref.transform.parent.gameObject);
+			Destroy(master.MR.itemup.gameObject);
+			yield return new WaitForEndOfFrame();
+			master.MR.restackpickups();
+			yield return new WaitForEndOfFrame();
+			Destroy(this.gameObject);
+			
+		}
 	}
 	
 	public virtual void dothething(){
-		master.MR.state = 1;
-		master.MR.clickevent = thisevent;
+		if(transform.parent == master.MR.inv){
+			master.MR.state = 1;
+			master.MR.clickevent = thisevent;
+		}
 	}
 	
 	public void punch(Transform t){

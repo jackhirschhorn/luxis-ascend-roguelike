@@ -17,6 +17,9 @@ public class enemy : entity
 	public override void die(){
 		master.MR.dropgold(gold,transform.position);
 		master.MR.droploot(loot,transform.position);
+		foreach(attack atk in brn.atks){
+			atk.clearattack();
+		}
 		//death animation
 		Destroy(this.gameObject);
 	}

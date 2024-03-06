@@ -19,4 +19,8 @@ public class attack : ScriptableObject
 	public virtual IEnumerator doatk2(Vector3 targ, entity me, int indx){
 		yield return new WaitForEndOfFrame();
 	}
+	
+	public virtual void clearattack(){
+		
+	}
 }

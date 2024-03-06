@@ -31,4 +31,8 @@ public class testatk : attack
 		yield return new WaitUntil(() => !me.anim.GetBool("attack"));
 		master.MR.doenemyturnatk(indx+1);
 	}
+	
+	public override void clearattack(){
+		if(visuse != null)Destroy(visuse.gameObject);
+	}
 }

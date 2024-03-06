@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class testitem : item
-{
+{	
     public void swing(Transform t){
 		Debug.Log("slash!");
 		foreach(Transform t2 in master.MR.entrans){

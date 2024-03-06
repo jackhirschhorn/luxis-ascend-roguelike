@@ -12,6 +12,7 @@ public class master : MonoBehaviour
 	public LayerMask wallonlymask;
 	public RectTransform hpscaler, manascaler;
 	public TextMeshProUGUI hptxt, manatxt, goldcounter;
+	public item itemup;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -42,6 +43,7 @@ public class master : MonoBehaviour
 			if(state == 0){
 				player.pc.move(t,0);
 			} else if(state == 1){
+				Debug.Log(clickevent);
 				clickevent.Invoke(t);
 			}
 		}
@@ -62,6 +64,7 @@ public class master : MonoBehaviour
 			clone.parent = itementholder;
 			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
+			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i -= 100;
 		}
 		while(i >= 10){
@@ -69,6 +72,7 @@ public class master : MonoBehaviour
 			clone.parent = itementholder;
 			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
+			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i -= 10;
 		}
 		while(i >= 1){
@@ -76,6 +80,7 @@ public class master : MonoBehaviour
 			clone.parent = itementholder;
 			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
+			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i--;
 		}
 	}
@@ -84,8 +89,10 @@ public class master : MonoBehaviour
 		foreach(Transform t in loot){
 			Transform clone = Instantiate(t);
 			clone.parent = itementholder;
-			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f+0.5f,Random.Range(-10,10)*0.03f);
+			clone.GetChild(1).position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f+0.5f,Random.Range(-10,10)*0.03f);
 			clone.GetChild(1).rotation = Random.rotation;
+			clone.GetChild(1).GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
+			
 		}
 	}
 	
@@ -181,10 +188,27 @@ public class master : MonoBehaviour
 			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
 		}	
 	}
-	
+		
 	public void hideitem(Transform itm, Transform itment){
 		itm.parent = itment.parent;
 		itm.gameObject.SetActive(false);
+	}
+	
+	public void hideallitems(){
+		foreach(Transform t in itementholder){
+			if(t.GetChild(0).GetComponent<itementity>())t.GetChild(0).GetComponent<itementity>().hide();
+		}
+	}
+	
+	public void pickup(){
+		inv.BroadcastMessage("pickup_itemcall");
+	}
+	
+	public void restackpickups(){
+		int temp = worlditemholder.childCount+1;
+		for(int i = worlditemholder.childCount-1; i > -1; i--){
+			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
+		}
 	}
 }
 

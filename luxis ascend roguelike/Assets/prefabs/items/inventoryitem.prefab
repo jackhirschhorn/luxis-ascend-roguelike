@@ -116,6 +116,9 @@ MonoBehaviour:
   nme: 
   damage: 0
   durability: 0
+  goldcost: 0
+  icon: {fileID: 0}
+  blank: {fileID: 21300000, guid: 0f17f7293e1120f418459a6bc474f5d6, type: 3}
   thisevent:
     m_PersistentCalls:
       m_Calls:

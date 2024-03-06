@@ -8,6 +8,10 @@ public class itementity : MonoBehaviour
 	public bool isgold = false;
 	public int goldvalue = 0;
 	
+	public void Awake(){
+		if(!isgold)itm.GetComponent<item>().itmref = this;
+	}
+	
 	public virtual void pickup(){
 		if(isgold){
 			player.pc.gold += goldvalue;
