@@ -67,6 +67,7 @@ public class item : MonoBehaviour
 			Destroy(master.MR.itemup.gameObject);
 			yield return new WaitForEndOfFrame();
 			master.MR.restackpickups();
+			master.MR.doenemyturn(0);
 			yield return new WaitForEndOfFrame();
 			Destroy(this.gameObject);
 			
