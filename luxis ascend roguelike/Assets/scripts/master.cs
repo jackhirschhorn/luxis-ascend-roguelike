@@ -16,9 +16,9 @@ public class master : MonoBehaviour
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
 		hptxt.text =""+ player.pc.chp;
-		hpscaler.anchorMin = new Vector2(hpscaler.anchorMin.x, (player.pc.hp+0f)/(player.pc.chp+0f));
+		hpscaler.anchorMin = new Vector2(hpscaler.anchorMin.x, (player.pc.chp+0f)/(player.pc.hp+0f));
 		manatxt.text =""+ player.pc.cmana;
-		manascaler.anchorMin = new Vector2(manascaler.anchorMin.x, (player.pc.mana+0f)/(player.pc.cmana+0f));
+		manascaler.anchorMin = new Vector2(manascaler.anchorMin.x, (player.pc.cmana+0f)/(player.pc.mana+0f));
 		goldcounter.text = ""+ player.pc.gold;
 	}
 	
@@ -41,7 +41,6 @@ public class master : MonoBehaviour
 		if(!player.pc.moving){
 			if(state == 0){
 				player.pc.move(t,0);
-				itmindx = 0;
 			} else if(state == 1){
 				clickevent.Invoke(t);
 			}
@@ -98,9 +97,9 @@ public class master : MonoBehaviour
 		clone.parent = inv;
 		int temp = inv.childCount+1;
 		clone.anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),58);
-		StartCoroutine(animateinv(clone,new Vector2(Screen.width*((temp-1f)/temp),58),0));
+		StartCoroutine(animateinv(clone,new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,58),0));
 		for(int i = inv.childCount-2; i > -1; i--){
-			StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
+			StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),inv.childCount-i+5));
 			//(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
 		}
 		
@@ -112,7 +111,7 @@ public class master : MonoBehaviour
 		int temp = inv.childCount+1;
 		for(int i = inv.childCount-1; i > -1; i--){
 			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
-			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58);
 		}
 		
 	}
@@ -141,19 +140,16 @@ public class master : MonoBehaviour
 	}
 	
 	public Transform worlditemholder;
-	public int itmindx = 0;
 	
 	public void showitem(Transform itm, Transform itment){
 		itm.parent = worlditemholder;
-		if(itmindx == 0){
-			itm.gameObject.SetActive(true);
-			itm.GetComponent<item>().visindx = itmindx;
-			Debug.Log(Camera.main.ScreenToWorldPoint(itment.position));
-			(itm as RectTransform).anchoredPosition = (Vector2)Camera.main.WorldToScreenPoint(itment.position);
-		} else {
-			
-		}
-		itmindx++;		
+		itm.gameObject.SetActive(true);
+		int temp = worlditemholder.childCount+1;
+		(itm as RectTransform).anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),58);
+		StartCoroutine(animateinv((itm as RectTransform),new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,58),0));
+		for(int i = worlditemholder.childCount-2; i > -1; i--){
+			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
+		}	
 	}
 	
 	public void hideitem(Transform itm, Transform itment){

@@ -9,7 +9,6 @@ public class item : MonoBehaviour
 	public int damage = 0;
 	public int durability = 0;
 	public int goldcost = 0;
-	public int visindx = 0;
 	public UEvent thisevent;
 	
 	public virtual void removedurability(int i){
