@@ -43,7 +43,6 @@ public class master : MonoBehaviour
 			if(state == 0){
 				player.pc.move(t,0);
 			} else if(state == 1){
-				Debug.Log(clickevent);
 				clickevent.Invoke(t);
 			}
 		}
@@ -153,6 +152,18 @@ public class master : MonoBehaviour
 		
 	}
 	
+	public void addinvitem(int i2){
+		RectTransform clone = Instantiate(invitempre as RectTransform);
+		clone.parent = inv;
+		clone.SetSiblingIndex(i2);
+		int temp = inv.childCount+1;
+		for(int i = inv.childCount-1; i > -1; i--){
+			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58);
+		}
+		
+	}
+	
 	public IEnumerator animateinv(RectTransform rt, Vector2 v, int i){
 		yield return new WaitForSeconds(i*0.02f);
 		Vector2 temp = rt.anchoredPosition;
@@ -200,8 +211,11 @@ public class master : MonoBehaviour
 		}
 	}
 	
+	public bool waspicked = false;
+	
 	public void pickup(){
 		inv.BroadcastMessage("pickup_itemcall");
+		waspicked = true;
 	}
 	
 	public void restackpickups(){

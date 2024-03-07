@@ -22,17 +22,19 @@ public class itementity : MonoBehaviour
 	}
 	
 	public virtual void hide(){
-		master.MR.hideitem(itm, this.transform);
+		if(transform.parent.gameObject.activeSelf){
+			master.MR.hideitem(itm, this.transform);
+		}
 	}
 	
 	public void OnTriggerEnter(Collider col){
-		if(col.tag == "Player"){
+		if(transform.parent.gameObject.activeSelf && col.tag == "Player"){
 			pickup();
 		}
 	}
 	
 	public void OnTriggerExit(Collider col){
-		if(col.tag == "Player"){
+		if(transform.parent.gameObject.activeSelf && col.tag == "Player"){
 			hide();
 		}
 	}

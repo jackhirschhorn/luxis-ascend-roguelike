@@ -7,12 +7,17 @@ public class animationtrigger : StateMachineBehaviour
 	
 	public string exit;
 	public string exitoff;
+	public string exiton;
 	public string resetint;
 	public string enter;
+	public string enteroff;
+	public string enteron;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(enter != null)animator.SetBool(enter,!animator.GetBool(enter));
+		if(enteroff != null)animator.SetBool(enteroff,false);
+		if(enteron != null)animator.SetBool(enteron,true);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -26,6 +31,7 @@ public class animationtrigger : StateMachineBehaviour
     {
         if(exit != null)animator.SetBool(exit,!animator.GetBool(exit));
 		if(exitoff != null)animator.SetBool(exitoff,false);
+		if(exiton != null)animator.SetBool(exiton,true);
 		if(resetint != null)animator.SetInteger(resetint,0);
     }
 
