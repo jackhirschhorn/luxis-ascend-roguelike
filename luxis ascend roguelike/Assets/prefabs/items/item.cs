@@ -38,7 +38,7 @@ public class item : MonoBehaviour
 		Debug.Log(nme + " broke!");
 	}
 	
-	public void ondrag(){
+	public virtual void ondrag(){
 		if(nme != ""){
 			master.MR.showdrag(icon, damage, durability);
 			transform.GetComponent<Image>().sprite = blank;
@@ -46,7 +46,7 @@ public class item : MonoBehaviour
 		}
 	}
 	
-	public void enddrag(){
+	public virtual void enddrag(){
 		if(nme != ""){
 			transform.GetComponent<Image>().sprite = icon;
 			master.MR.pickup();
@@ -55,7 +55,7 @@ public class item : MonoBehaviour
 		}
 	}
 	
-	public IEnumerator enddrag2(){
+	public virtual IEnumerator enddrag2(){
 		yield return new WaitForEndOfFrame();
 		yield return new WaitForEndOfFrame();
 		master.MR.itemup = null;
@@ -64,14 +64,21 @@ public class item : MonoBehaviour
 			dropitem();
 			master.MR.addinvitem(temp);
 			master.MR.waspicked = false;
+			master.MR.doenemyturn(0);
+		} else if (master.MR.waspicked && transform.parent.name == "inv"){
+			int temp = this.transform.GetSiblingIndex();
+			Transform tempt = transform.parent.parent.parent;
+			dropitem();
+			tempt.GetComponent<backpack>().replaceslot(temp);
+			master.MR.doenemyturn(0);
 		}
 	}
 	
-	public void pickup_itemcall(){
-		if(transform.GetComponent<Animator>().GetBool("ye") && transform.parent == master.MR.inv)StartCoroutine(pickup2());
+	public virtual void pickup_itemcall(){
+		if(transform.GetComponent<Animator>().GetBool("ye") && (transform.parent == master.MR.inv || transform.parent.name == "inv"))StartCoroutine(pickup2());
 	}
 	
-	public IEnumerator pickup2(){
+	public virtual IEnumerator pickup2(){
 		yield return new WaitForEndOfFrame();
 		if(master.MR.itemup != null){
 			if(master.MR.itemup == this){
@@ -80,7 +87,14 @@ public class item : MonoBehaviour
 				master.MR.waspicked = false;
 				Transform clone = master.MR.itemup.transform;
 				if(clone.parent != transform.parent){
-					clone.parent = transform.parent;
+					if(clone.parent.name == "inv"){ //from backpack
+						int temp = clone.GetSiblingIndex();
+						Transform tempt = clone.parent.parent.parent;
+						clone.parent = transform.parent;
+						tempt.GetComponent<backpack>().replaceslot(temp);
+					} else {
+						clone.parent = transform.parent;
+					}
 					clone.SetSiblingIndex(this.transform.GetSiblingIndex()+1);
 					(clone as RectTransform).anchoredPosition = (this.transform as RectTransform).anchoredPosition;
 					master.MR.itemup.itmref.transform.parent.gameObject.SetActive(false);
@@ -120,6 +134,10 @@ public class item : MonoBehaviour
 			master.MR.state = 1;
 			master.MR.clickevent = thisevent;
 		}
+	}
+	
+	public virtual void onmove(){
+		
 	}
 	
 	public void punch(Transform t){

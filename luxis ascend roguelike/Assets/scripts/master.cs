@@ -210,6 +210,9 @@ public class master : MonoBehaviour
 		foreach(Transform t in itementholder){
 			if(t.GetChild(0).GetComponent<itementity>())t.GetChild(0).GetComponent<itementity>().hide();
 		}
+		foreach(Transform t2 in inv){
+			t2.GetComponent<item>().onmove();
+		}
 	}
 	
 	public bool waspicked = false;

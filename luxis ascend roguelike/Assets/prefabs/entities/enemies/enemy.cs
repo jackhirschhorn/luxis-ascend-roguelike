@@ -12,6 +12,7 @@ public class enemy : entity
 	public virtual void Awake(){
 		brn = Instantiate(brn);
 		brn.me = this;
+		brn.init();
 	}	
 	
 	public override void die(){

@@ -13,8 +13,9 @@ public class brain : ScriptableObject
 	public entity me;
 	public attack hit = null;
 	
-	public void Start(){
+	public void init(){
 		for(int i = 0; i < atks.Length; i++){
+			atks[i].clearattack();
 			atks[i] = Instantiate(atks[i]);
 		}
 	}

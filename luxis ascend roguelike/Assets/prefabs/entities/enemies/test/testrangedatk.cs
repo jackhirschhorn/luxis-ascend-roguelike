@@ -46,7 +46,7 @@ public class testrangedatk : attack
 		for (int i = visuse.Count - 1; i >= 0; i--){
 			Destroy(visuse[i].gameObject);
 		}
-		visuse.Clear();
+		master.MR.StartCoroutine(clearit());
 		//Destroy(visuse.gameObject);
 		me.anim.SetBool("attack",true);
 		yield return new WaitUntil(() => !me.anim.GetBool("attack"));
@@ -56,6 +56,12 @@ public class testrangedatk : attack
 	public override void clearattack(){
 		for (int i = visuse.Count - 1; i >= 0; i--){
 			if(visuse[i]!= null)Destroy(visuse[i].gameObject);
+			master.MR.StartCoroutine(clearit());
 		}
+	}
+	
+	public IEnumerator clearit(){
+		yield return new WaitForEndOfFrame();
+		visuse.Clear();
 	}
 }
