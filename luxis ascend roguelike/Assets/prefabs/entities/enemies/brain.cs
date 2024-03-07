@@ -13,7 +13,7 @@ public class brain : ScriptableObject
 	public entity me;
 	public attack hit = null;
 	
-	public void Awake(){
+	public void Start(){
 		for(int i = 0; i < atks.Length; i++){
 			atks[i] = Instantiate(atks[i]);
 		}

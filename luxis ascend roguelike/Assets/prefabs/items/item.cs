@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class item : MonoBehaviour
 {
@@ -16,6 +17,12 @@ public class item : MonoBehaviour
 	
 	public void Awake(){
 		if(icon == null)icon = transform.GetComponent<Image>().sprite;
+		if(damage != -1){
+			transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+damage;
+			transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ""+durability;
+		} else if (durability != -1) {
+			transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+durability;
+		}
 	}
 	
 	public virtual void removedurability(int i){
@@ -33,6 +40,7 @@ public class item : MonoBehaviour
 	
 	public void ondrag(){
 		if(nme != ""){
+			master.MR.showdrag(icon, damage, durability);
 			transform.GetComponent<Image>().sprite = blank;
 			master.MR.itemup = this;
 		}
@@ -43,6 +51,7 @@ public class item : MonoBehaviour
 			transform.GetComponent<Image>().sprite = icon;
 			master.MR.pickup();
 			StartCoroutine(enddrag2());
+			master.MR.hidedrag();
 		}
 	}
 	
@@ -116,7 +125,7 @@ public class item : MonoBehaviour
 	public void punch(Transform t){
 		Debug.Log("punch!");
 		foreach(Transform t2 in master.MR.entrans){
-			if(Vector3.Distance(t.position, t2.position) <= 0.1f)t2.GetComponent<entity>().takedamage(1,0);
+			if(Vector3.Distance(t.position, t2.position) <= 0.1f)t2.GetComponent<entity>().takedamage(damage,0);
 		}
 		master.MR.state = 0;
 		master.MR.clickevent = null;

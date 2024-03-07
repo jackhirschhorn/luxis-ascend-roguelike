@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 
 public class master : MonoBehaviour
@@ -223,6 +224,27 @@ public class master : MonoBehaviour
 		for(int i = worlditemholder.childCount-1; i > -1; i--){
 			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
 		}
+	}
+	
+	public Transform dragicon;
+	
+	public void showdrag(Sprite s, int dam, int dur){
+		dragicon.GetComponent<Image>().sprite = s;
+		dragicon.gameObject.SetActive(true);
+		if(dam != -1){
+			dragicon.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+dam;
+			dragicon.GetChild(1).GetComponent<TextMeshProUGUI>().text = ""+dur;
+		} else if (dur != -1) {
+			dragicon.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+dur;
+			dragicon.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
+		} else {
+			dragicon.GetChild(0).GetComponent<TextMeshProUGUI>().text = "";
+			dragicon.GetChild(1).GetComponent<TextMeshProUGUI>().text = "";
+		}
+	}
+	
+	public void hidedrag(){
+		dragicon.gameObject.SetActive(false);
 	}
 }
 

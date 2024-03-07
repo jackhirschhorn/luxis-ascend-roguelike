@@ -8,7 +8,7 @@ public class testitem : item
 		Debug.Log("slash!");
 		foreach(Transform t2 in master.MR.entrans){
 			if(Vector3.Distance(t.position, t2.position) <= 0.1f){
-				t2.GetComponent<entity>().takedamage(1,0);
+				t2.GetComponent<entity>().takedamage(damage,0);
 				removedurability(1);
 			}
 		}
