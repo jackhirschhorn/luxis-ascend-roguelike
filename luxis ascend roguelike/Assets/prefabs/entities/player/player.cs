@@ -7,6 +7,7 @@ public class player : entity
     public static player pc;
 	public int gold = 0;
 	public int inventorysize = 2;
+	public int karma = 0;
 	
 	
 	

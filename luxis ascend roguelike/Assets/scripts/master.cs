@@ -14,6 +14,7 @@ public class master : MonoBehaviour
 	public RectTransform hpscaler, manascaler;
 	public TextMeshProUGUI hptxt, manatxt, goldcounter;
 	public item itemup;
+	public List<vow> vows = new List<vow>();
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -25,7 +26,7 @@ public class master : MonoBehaviour
 	}
 	
 	public void Update(){
-		if(Input.GetKeyDown(KeyCode.Space))addinvitem();
+		if(Input.GetKeyDown(KeyCode.Space))karmachoose.kc.makenewchoice();
 	}
 	
 	public void Awake(){
@@ -248,6 +249,10 @@ public class master : MonoBehaviour
 	
 	public void hidedrag(){
 		dragicon.gameObject.SetActive(false);
+	}
+	
+	public void addvow(vow v){
+		vows.Add(v);
 	}
 }
 
