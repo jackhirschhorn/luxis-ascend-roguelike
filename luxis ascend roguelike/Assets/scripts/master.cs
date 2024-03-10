@@ -251,8 +251,15 @@ public class master : MonoBehaviour
 		dragicon.gameObject.SetActive(false);
 	}
 	
+	public TextMeshProUGUI vownum;
+	
 	public void addvow(vow v){
 		vows.Add(v);
+		int temp = 0;
+		foreach(vow v2 in vows){
+			temp += v2.karmavalue;
+		}
+		vownum.text = temp+"";
 	}
 }
 

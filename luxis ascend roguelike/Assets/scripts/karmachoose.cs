@@ -18,7 +18,6 @@ public class karmachoose : MonoBehaviour
 	
     public void makenewchoice(){
 		int rand = Random.Range(0,2);
-		Debug.Log(rand);
 		if(player.pc.karma >= 6){//best karma
 			generatechoices(3,3,3,-1,-1,-1);
 		} else if(player.pc.karma == 5){
