@@ -21,7 +21,7 @@ public class meleepath : pathfinder
 			Vector3 dir = new Vector3(i<4?1:(i>6?-1:0),0,(i%3==0?-1:(i%2==0?0:1)));
 			dir = dir.normalized;
 			RaycastHit hit;
-			if(Physics.SphereCast(me.transform.position, 0.1f, dir,out hit, 1f)){
+			if(Physics.SphereCast(me.transform.position+new Vector3(0,0.2f,0), 0.1f, dir,out hit, 1f)){
 				moveable[i-1] = false;
 			} else {
 				moveable[i-1] = true;

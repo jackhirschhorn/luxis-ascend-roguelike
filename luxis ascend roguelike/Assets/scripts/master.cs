@@ -15,6 +15,7 @@ public class master : MonoBehaviour
 	public TextMeshProUGUI hptxt, manatxt, goldcounter;
 	public item itemup;
 	public List<vow> vows = new List<vow>();
+	public bool canmove = true;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -41,7 +42,7 @@ public class master : MonoBehaviour
 	
 	public void tileclick(Transform t){
 		//changes based on states
-		if(!player.pc.moving){
+		if(!player.pc.moving && canmove){
 			if(state == 0){
 				player.pc.move(t,0);
 			} else if(state == 1){
@@ -105,6 +106,7 @@ public class master : MonoBehaviour
 	public Transform entrans;
 	
 	public void doenemyturn(int i){	
+		canmove = false;
 		StartCoroutine(doenemyturn2(i));
 	}
 	
@@ -124,6 +126,8 @@ public class master : MonoBehaviour
 		yield return new WaitForEndOfFrame();
 		if(i < entrans.childCount){
 			entrans.GetChild(i).GetComponent<enemy>().brn.doatkturn(i);
+		} else {
+			canmove = true;
 		}
 	}
 	
