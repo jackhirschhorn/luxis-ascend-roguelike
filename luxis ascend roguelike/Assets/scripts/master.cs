@@ -16,6 +16,8 @@ public class master : MonoBehaviour
 	public item itemup;
 	public List<vow> vows = new List<vow>();
 	public bool canmove = true;
+	public delegate void dielegate();
+	public dielegate diecall;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -127,6 +129,10 @@ public class master : MonoBehaviour
 		if(i < entrans.childCount){
 			entrans.GetChild(i).GetComponent<enemy>().brn.doatkturn(i);
 		} else {
+			if(diecall != null){
+				diecall();
+				diecall = null;
+			}
 			canmove = true;
 		}
 	}

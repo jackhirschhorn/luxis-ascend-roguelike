@@ -5,6 +5,7 @@ using UnityEngine;
 public class entity : MonoBehaviour
 {
     public int hp, chp, mana, cmana, armor;
+	public bool dead = false;
 	
 	
 	public Animator anim;
@@ -66,7 +67,7 @@ public class entity : MonoBehaviour
 		if(chp <= 0)die();
 	}
 	
-	public virtual void die(){
+	public virtual void die(){//need to do this all at once during the cleanup step
 		Destroy(this.gameObject);
 	}
 }

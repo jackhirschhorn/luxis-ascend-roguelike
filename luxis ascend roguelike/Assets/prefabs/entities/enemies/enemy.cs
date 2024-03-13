@@ -22,7 +22,9 @@ public class enemy : entity
 			atk.clearattack();
 		}
 		//death animation
-		Destroy(this.gameObject);
+		//Destroy(this.gameObject);
+		dead = true;
+		master.MR.diecall += base.die;
 	}
 	
 }
