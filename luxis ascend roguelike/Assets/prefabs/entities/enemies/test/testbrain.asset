@@ -19,7 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e75af82d2f076a64a998b053c1fd2a90, type: 2}
   atks:
   - {fileID: 11400000, guid: acc4e58835503a247a3488fdb5b58ed3, type: 2}
-  - {fileID: 11400000, guid: 8eb8adc60d37d99419075751c85de80a, type: 2}
+  - {fileID: 11400000, guid: 0d03347829a373d4dad04d301cca6c55, type: 2}
   pf: {fileID: 11400000, guid: 6994a96738aeb644aa6c0294e8ea0e0a, type: 2}
   me: {fileID: 0}
   hit: {fileID: 0}
