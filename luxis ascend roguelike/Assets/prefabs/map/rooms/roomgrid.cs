@@ -17,15 +17,15 @@ using UnityEditor;
 //
 public class roomgrid : MonoBehaviour
 {
-	[Header( "Cell values cycle from 0 to this-1")]
-	int MaxValue = 2;
+	[Header( "0 = empty, 1 = room, 2 = doorN, 3 = doorS, 4 = doorL, 5 = doorR")]
+	int MaxValue = 6;
 
-	[Header( "Actual saved payload. Use GetCell(x,y) to read!")]
-	[Header( "WARNING: changing this will nuke your data!")]
+	//[Header( "Actual saved payload. Use GetCell(x,y) to read!")]
+	//[Header( "WARNING: changing this will nuke your data!")]
 	public string data;
 
-	int across = 5;
-	int down = 5;
+	int across = 7;
+	int down = 7;
 	
 	public int gridx,gridy;
 
@@ -41,7 +41,22 @@ public class roomgrid : MonoBehaviour
 		return data.Substring( n, 1);
 	}
 
-#if UNITY_EDITOR
+	public Vector2 findcell(int i){
+		int temp = data.IndexOf(i+"");
+		if(temp == -1) return new Vector2(10,10);
+		int tempx = (temp%7)-3;
+		int tempy = (temp/7)-3;
+		return new Vector2(tempx,tempy);
+	}
+
+	public void emptycell (Vector2 v){
+		int temp = (int)(((v.y+3)*7)+(v.x+3));
+		char[] chars = data.ToCharArray();
+		chars[temp] = '0';
+		data = new string(chars);
+	}
+
+	#if UNITY_EDITOR
 	void OnValidate()
 	{
 		if (data == null || data.Length != (across * down))
@@ -128,7 +143,7 @@ public class roomgrid : MonoBehaviour
 
 			EditorGUILayout.BeginVertical();
 
-			GUILayout.Label( "WARNING: Save and commit your prefab/scene OFTEN!");
+			//GUILayout.Label( "WARNING: Save and commit your prefab/scene OFTEN!");
 
 			for (int y = 0; y < grid.down; y++)
 			{
@@ -154,7 +169,7 @@ public class roomgrid : MonoBehaviour
 			}
 			GUI.color = Color.yellow;
 
-			GUILayout.Label( "DANGER ZONE BELOW THIS AREA!");
+			//GUILayout.Label( "DANGER ZONE BELOW THIS AREA!");
 
 			GUI.color = Color.white;
 

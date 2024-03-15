@@ -29,7 +29,7 @@ public class master : MonoBehaviour
 	}
 	
 	public void Update(){
-		if(Input.GetKeyDown(KeyCode.Space))karmachoose.kc.makenewchoice();
+		if(Input.GetKeyDown(KeyCode.Space))transform.GetComponent<mapgen>().generatefloorcall();
 	}
 	
 	public void Awake(){
