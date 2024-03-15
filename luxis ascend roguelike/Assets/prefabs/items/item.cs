@@ -131,8 +131,13 @@ public class item : MonoBehaviour
 	
 	public virtual void dothething(){
 		if(transform.parent == master.MR.inv){
-			master.MR.state = 1;
-			master.MR.clickevent = thisevent;
+			if(master.MR.clickevent == thisevent){
+				master.MR.state = 0;
+				master.MR.clickevent = null;
+			} else {
+				master.MR.state = 1;
+				master.MR.clickevent = thisevent;
+			}
 		}
 	}
 	
