@@ -40,14 +40,17 @@ public class mapgen : MonoBehaviour
 				connectfind2 = par.GetComponent<roomgrid>().findcell(rando2);
 				Debug.Log(connectfind2);
 				yield return new WaitForEndOfFrame();
-			}	
-			int offsetx = (int)(connectfind.x-(connectfind.x != 0?(connectfind2.x > 0?connectfind2.x-1:connectfind2.x+1):0));
-			int offsety = (int)(connectfind.y-(connectfind.y != 0?(connectfind2.y > 0?connectfind2.y-1:connectfind2.y+1):0));
+			}
+			
+			int offsetx = (int)(-connectfind.x+connectfind2.x+(-connectfind.x+connectfind2.x >= 0.95f || -connectfind.x+connectfind2.x <= -0.95f?(-connectfind.x+connectfind2.x > 0?-1:1):0));
+			int offsety = (int)(connectfind.y-connectfind2.y+(connectfind.y-connectfind2.y >= 0.95f || connectfind.y-connectfind2.y <= -0.95f?(connectfind.y-connectfind2.y > 0?-1:1):0));
+			
 			
 			Debug.Log(offsetx + " " + offsety);
 
 			clone.parent = map;
-			clone.position = par.position+new Vector3((offsetx*5)+(offsetx != 0?(offsetx >= 1?1:-1):0),0,(offsety*5)+(offsety != 0?(offsety >= 1?1:-1):0));
+			//clone.position = par.position+new Vector3((offsetx*5)+(offsetx != 0?(offsetx >= 1?1:-1):0),0,(offsety*5)+(offsety != 0?(offsety >= 1?1:-1):0));
+			clone.position = par.position+new Vector3((offsetx*6),0,(offsety*6));
 			clone.GetComponent<roomgrid>().emptycell(connectfind);
 			par.GetComponent<roomgrid>().emptycell(connectfind2);
 			curfloorsize++;
