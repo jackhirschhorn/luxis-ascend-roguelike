@@ -25,6 +25,7 @@ public class mapgen : MonoBehaviour
 		int curfloorsize = 1;
 		//generate rest of rooms
 		while(curfloorsize < floorsize){
+			yield return new WaitForEndOfFrame();
 			clone = Instantiate(rooms[Random.Range(0,rooms.Count)]);
 			clone.position = new Vector3(0,-10,0);
 			int rando1 = Random.Range(2,5);
@@ -54,6 +55,7 @@ public class mapgen : MonoBehaviour
 				foreach(Vector2 v2 in tempvecs){
 					yield return new WaitForEndOfFrame();
 					Vector3 placecheck = par.position+new Vector3((offsetx*6),0,(offsety*6))+new Vector3(v2.x*6,0,-v2.y*6);
+					//Debug.DrawLine(placecheck, placecheck+(Vector3.forward*curfloorsize),(curfloorsize%5==1?Color.red:(curfloorsize%5==2?Color.blue:(curfloorsize%5==3?Color.green:(curfloorsize%5==4?Color.black:Color.white)))), 2, false);
 					if(Physics.OverlapSphere(placecheck, 1, lm).Length != 0){
 						free = false;
 						break;

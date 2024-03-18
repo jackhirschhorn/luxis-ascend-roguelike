@@ -323,7 +323,7 @@ MonoBehaviour:
   lm:
     serializedVersion: 2
     m_Bits: 512
-  floorsize: 25
+  floorsize: 50
 --- !u!1 &121450198
 GameObject:
   m_ObjectHideFlags: 0
