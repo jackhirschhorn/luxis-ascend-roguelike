@@ -320,7 +320,10 @@ MonoBehaviour:
   - {fileID: 4863316482547527463, guid: 2cba724a75bfc1d46b9599ddfb054f8e, type: 3}
   saferoom: {fileID: 5959319747461139802, guid: a3c1d09563a978643b556996edb83a77, type: 3}
   map: {fileID: 558347960}
-  floorsize: 10
+  lm:
+    serializedVersion: 2
+    m_Bits: 512
+  floorsize: 25
 --- !u!1 &121450198
 GameObject:
   m_ObjectHideFlags: 0

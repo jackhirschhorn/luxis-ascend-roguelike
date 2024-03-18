@@ -42,7 +42,13 @@ public class roomgrid : MonoBehaviour
 	}
 
 	public Vector2 findcell(int i){
-		int temp = data.IndexOf(i+"");
+		int count = data.Split((i+"")).Length - 1;
+		if(count == -1) return new Vector2(10,10);	
+		int rando = Random.Range(0,count);
+		int temp = 0;
+		for(int i2 = 0; i2 <= rando;i2++){
+			temp = data.IndexOf(i+"",temp+1);
+		}
 		if(temp == -1) return new Vector2(10,10);
 		int tempx = (temp%7)-3;
 		int tempy = (temp/7)-3;
@@ -54,6 +60,19 @@ public class roomgrid : MonoBehaviour
 		char[] chars = data.ToCharArray();
 		chars[temp] = '0';
 		data = new string(chars);
+	}
+	
+	public List<Vector2> findcells(int i){
+		List<Vector2> returno = new List<Vector2>();
+		int temp = 0;
+		while(temp != -1){
+			temp = data.IndexOf(i+"",temp+1);
+			if(temp == -1)break;
+			int tempx = (temp%7)-3;
+			int tempy = (temp/7)-3;
+			returno.Add(new Vector2(tempx,tempy));
+		}
+		return returno;
 	}
 
 	#if UNITY_EDITOR
