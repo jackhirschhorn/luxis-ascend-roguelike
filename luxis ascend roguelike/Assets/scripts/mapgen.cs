@@ -11,6 +11,7 @@ public class mapgen : MonoBehaviour
 	public LayerMask lm;
 	
 	public int floorsize = 5;
+	public int whattheme = 0;
 	
 	public void generatefloorcall(){
 		StartCoroutine(generatefloor());
@@ -25,7 +26,6 @@ public class mapgen : MonoBehaviour
 		int curfloorsize = 1;
 		//generate rest of rooms
 		while(curfloorsize < floorsize){
-			yield return new WaitForEndOfFrame();
 			clone = Instantiate(rooms[Random.Range(0,rooms.Count)]);
 			clone.position = new Vector3(0,-10,0);
 			int rando1 = Random.Range(2,5);
@@ -52,6 +52,7 @@ public class mapgen : MonoBehaviour
 				
 				List<Vector2> tempvecs = clone.GetComponent<roomgrid>().findcells(1);
 				free = true;
+				yield return new WaitForEndOfFrame();
 				foreach(Vector2 v2 in tempvecs){
 					yield return new WaitForEndOfFrame();
 					Vector3 placecheck = par.position+new Vector3((offsetx*6),0,(offsety*6))+new Vector3(v2.x*6,0,-v2.y*6);
@@ -70,6 +71,25 @@ public class mapgen : MonoBehaviour
 				}
 				yield return new WaitForEndOfFrame();					
 			} while (!free);
+		}
+		//DOTHIS: connect adjacent rooms
+		
+		
+		//populate rooms
+		foreach(Transform c in map){
+			//tiles
+			foreach(Transform c2 in c.GetChild(0)){
+				Transform clone2 = Instantiate(themes[whattheme].tiles[int.Parse(c2.gameObject.tag)]);
+				clone2.parent = c2;
+				clone2.position = c2.position;
+			}
+			//doors
+			
+			//walls
+			foreach(Transform c3 in c.GetChild(1)){
+				
+			}
+			yield return new WaitForEndOfFrame();
 		}
 	}
 }
