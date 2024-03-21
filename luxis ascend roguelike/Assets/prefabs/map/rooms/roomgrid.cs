@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -35,7 +36,7 @@ public class roomgrid : MonoBehaviour
 	// TODO: map above characters to graphics??
 
 	// for you to get stuff out of the grid to use in your game
-	public string GetCell( int x, int y)
+	public string getcell( int x, int y)
 	{
 		int n = GetIndex( x, y);
 		return data.Substring( n, 1);
@@ -71,6 +72,38 @@ public class roomgrid : MonoBehaviour
 			int tempx = (temp%7)-3;
 			int tempy = (temp/7)-3;
 			returno.Add(new Vector2(tempx,tempy));
+		}
+		return returno;
+	}
+	
+	public List<List<Vector2>> finddoorchecks(){
+		List<List<Vector2>> returno = new List<List<Vector2>>();
+		int temp = 0;
+		while(temp != -1){
+			List<Vector2> returne = new List<Vector2>();
+			temp = data.IndexOf("1",temp+1);
+			if(temp == -1)break;
+
+			int tempx = (temp%7)-3;
+			int tempy = (temp/7)-3;
+			returne.Add(new Vector2(tempx,tempy));
+
+			tempx = ((temp+1)%7)-3;
+			tempy = (temp/7)-3;
+			if(!getcell(tempx+3,tempy+3).Equals("1"))returne.Add(new Vector2(tempx,tempy));
+			
+			tempx = ((temp-1)%7)-3;
+			tempy = (temp/7)-3;
+			if(!getcell(tempx+3,tempy+3).Equals("1"))returne.Add(new Vector2(tempx,tempy));
+			
+			tempx = (temp%7)-3;
+			tempy = ((temp+7)/7)-3;
+			if(!getcell(tempx+3,tempy+3).Equals("1"))returne.Add(new Vector2(tempx,tempy));
+			
+			tempx = (temp%7)-3;
+			tempy = ((temp-7)/7)-3;
+			if(!getcell(tempx+3,tempy+3).Equals("1"))returne.Add(new Vector2(tempx,tempy));
+			returno.Add(returne);
 		}
 		return returno;
 	}

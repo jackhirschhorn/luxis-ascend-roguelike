@@ -26,6 +26,8 @@ public class mapgen : MonoBehaviour
 		int curfloorsize = 1;
 		//generate rest of rooms
 		while(curfloorsize < floorsize){
+			yield return new WaitForEndOfFrame();
+			yield return new WaitForEndOfFrame();
 			clone = Instantiate(rooms[Random.Range(0,rooms.Count)]);
 			clone.position = new Vector3(0,-10,0);
 			int rando1 = Random.Range(2,5);
@@ -72,10 +74,35 @@ public class mapgen : MonoBehaviour
 				yield return new WaitForEndOfFrame();					
 			} while (!free);
 		}
-		//DOTHIS: connect adjacent rooms
-		
-		
 		//populate rooms
+		foreach(Transform c in map){
+			//doors
+			roomgrid grd = c.GetComponent<roomgrid>();
+			List<Vector3> veccheck = new List<Vector3>();
+			Vector3 vecpar = new Vector3();
+			foreach(List<Vector2> vl in grd.finddoorchecks()){
+				if(vl.Count != 0){
+					vecpar = new Vector3(vl[0].x*6,0,-vl[0].y*6);
+					for(int i = 1; i < vl.Count;i++){					
+						veccheck.Add(new Vector3(vl[i].x*6,0,-vl[i].y*6));
+					}
+					for(int i = 0; i < veccheck.Count;i++){
+						Collider[] col = Physics.OverlapSphere(c.position+veccheck[i], 1, lm);
+						if(col.Length != 0 && col[0].transform.parent.parent != c){
+							//Debug.Log(Physics.OverlapSphere(c.position+veccheck[i], 1, lm).Length + " placed");
+							//place door
+							Transform clone2 = Instantiate(themes[whattheme].doors[Random.Range(0,themes[whattheme].doors.Count)]);
+							clone2.parent = c.GetChild(1);
+							clone2.position = c.position+(vecpar+(veccheck[i]-vecpar)/2);
+							//rotate door model
+						}
+					}
+				}
+				veccheck.Clear();
+				yield return new WaitForEndOfFrame();
+			}
+			
+		}
 		foreach(Transform c in map){
 			//tiles
 			foreach(Transform c2 in c.GetChild(0)){
@@ -83,11 +110,16 @@ public class mapgen : MonoBehaviour
 				clone2.parent = c2;
 				clone2.position = c2.position;
 			}
-			//doors
 			
 			//walls
-			foreach(Transform c3 in c.GetChild(1)){
-				
+			foreach(Transform c3 in c.GetChild(2)){
+				//place a corner at each piece, then a wall between them if it doesn't touch anything else
+					Transform clone2;
+					if(Physics.OverlapSphere(c3.position, 0.1f, master.MR.wallonlymask).Length == 0){
+						clone2 = Instantiate(themes[whattheme].wallconnectors[Random.Range(0,themes[whattheme].wallconnectors.Count)]);
+						clone2.parent = c3;
+						clone2.position = c3.position;
+					}
 			}
 			yield return new WaitForEndOfFrame();
 		}

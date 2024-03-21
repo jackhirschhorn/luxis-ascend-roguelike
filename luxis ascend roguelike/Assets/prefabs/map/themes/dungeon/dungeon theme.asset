@@ -20,8 +20,10 @@ MonoBehaviour:
   - {fileID: 4444772177871410258, guid: 6ed11b1abd0e5e343b0e40452d633056, type: 3}
   doors:
   - {fileID: 8581247450543876522, guid: fcf9a56b65b45864fa85f5987987fe33, type: 3}
-  walls: []
-  wallconnectors: []
+  walls:
+  - {fileID: 5309052251287286747, guid: 980a7ccb2b607324ca21a1c28048f13d, type: 3}
+  wallconnectors:
+  - {fileID: 7936010606229556932, guid: 0ba48923851678342ba71b7646d29229, type: 3}
   deco: []
   enemy_melee: []
   enemy_ranged: []
