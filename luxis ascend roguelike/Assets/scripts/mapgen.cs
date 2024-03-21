@@ -103,6 +103,7 @@ public class mapgen : MonoBehaviour
 			}
 			
 		}
+		yield return new WaitForEndOfFrame();		
 		foreach(Transform c in map){
 			//tiles
 			foreach(Transform c2 in c.GetChild(0)){
@@ -112,14 +113,29 @@ public class mapgen : MonoBehaviour
 			}
 			
 			//walls
-			foreach(Transform c3 in c.GetChild(2)){
+			for(int i = 0; i < c.GetChild(2).childCount; i++){
 				//place a corner at each piece, then a wall between them if it doesn't touch anything else
+					Transform c3 = c.GetChild(2).GetChild(i);
+					Transform c4 = (i == c.GetChild(2).childCount-1?c.GetChild(2).GetChild(0):c.GetChild(2).GetChild(i+1));
 					Transform clone2;
 					if(Physics.OverlapSphere(c3.position, 0.1f, master.MR.wallonlymask).Length == 0){
 						clone2 = Instantiate(themes[whattheme].wallconnectors[Random.Range(0,themes[whattheme].wallconnectors.Count)]);
 						clone2.parent = c3;
-						clone2.position = c3.position;
+						clone2.position = c3.position+new Vector3(0,0.5f,0);
 					}
+					int tempdist = (int)Vector3.Distance(c3.position, c4.position);
+					bool rotit = (c3.position.x == c4.position.x?true:false);
+					for(int i2 = 1; i2 < tempdist; i2++){
+						Vector3 tempplace = Vector3.Lerp(c3.position,c4.position, (i2+0f)/(tempdist+0f));
+						Vector3 theplace = new Vector3(Mathf.FloorToInt(tempplace.x+0.5f),0,Mathf.FloorToInt(tempplace.z+0.5f));
+						if(Physics.OverlapSphere(theplace, 0.25f, master.MR.wallonlymask).Length == 0){
+							clone2 = Instantiate(themes[whattheme].walls[Random.Range(0,themes[whattheme].walls.Count)]);
+							clone2.parent = c3;
+							clone2.position = theplace+new Vector3(0,0.5f,0);
+							if(rotit)clone2.rotation = Quaternion.Euler(0,90,0);
+						}
+					}
+					yield return new WaitForEndOfFrame();		
 			}
 			yield return new WaitForEndOfFrame();
 		}
