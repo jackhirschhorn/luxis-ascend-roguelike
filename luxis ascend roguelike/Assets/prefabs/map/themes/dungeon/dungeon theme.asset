@@ -25,8 +25,10 @@ MonoBehaviour:
   wallconnectors:
   - {fileID: 7936010606229556932, guid: 0ba48923851678342ba71b7646d29229, type: 3}
   deco: []
-  enemy_melee: []
-  enemy_ranged: []
+  enemy_melee:
+  - {fileID: 6129108629396375580, guid: 47bd811d52e97b5458da82af0ee3dc93, type: 3}
+  enemy_ranged:
+  - {fileID: 6129108629396375580, guid: 47bd811d52e97b5458da82af0ee3dc93, type: 3}
   enemy_heavy: []
   enemy_magic: []
   enemy_fast: []

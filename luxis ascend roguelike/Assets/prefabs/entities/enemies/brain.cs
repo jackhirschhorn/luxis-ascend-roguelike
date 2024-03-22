@@ -12,6 +12,7 @@ public class brain : ScriptableObject
 	public pathfinder pf;
 	public entity me;
 	public attack hit = null;
+	public bool activated = false;
 	
 	public void init(){
 		for(int i = 0; i < atks.Length; i++){
@@ -21,6 +22,10 @@ public class brain : ScriptableObject
 	}
 	
 	public virtual void doturn(int indx){
+		if(!activated){
+			master.MR.doenemyturn(indx+1);
+			return;
+		}
 		if(!me.dead){
 			switch(state){
 				case 0: //search
@@ -63,6 +68,10 @@ public class brain : ScriptableObject
 	}
 	
 	public virtual void doatkturn(int indx){
+		if(!activated){
+			master.MR.doenemyturnatk(indx+1);
+			return;
+		}
 		if(!me.dead){	
 			switch(state){
 				case 2:

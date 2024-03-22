@@ -11,6 +11,7 @@ public class master : MonoBehaviour
 	public int state = 0;//0 = move, 1 = item
 	public UEvent clickevent;
 	public LayerMask wallonlymask;
+	public LayerMask entitymask;
 	public RectTransform hpscaler, manascaler;
 	public TextMeshProUGUI hptxt, manatxt, goldcounter;
 	public item itemup;
@@ -113,11 +114,11 @@ public class master : MonoBehaviour
 	}
 	
 	public IEnumerator doenemyturn2(int i){
-		yield return new WaitForEndOfFrame();
 		if(i < entrans.childCount){entrans.GetChild(i).GetComponent<enemy>().brn.doturn(i);
 		} else {
 			doenemyturnatk(0);
 		}
+		yield return new WaitForEndOfFrame();
 	}
 	
 	public void doenemyturnatk(int i){
@@ -125,7 +126,6 @@ public class master : MonoBehaviour
 	}
 	
 	public IEnumerator doenemyturnatk2(int i){
-		yield return new WaitForEndOfFrame();
 		if(i < entrans.childCount){
 			entrans.GetChild(i).GetComponent<enemy>().brn.doatkturn(i);
 		} else {
@@ -135,6 +135,7 @@ public class master : MonoBehaviour
 			}
 			canmove = true;
 		}
+		yield return new WaitForEndOfFrame();
 	}
 	
 	public Transform invitempre;

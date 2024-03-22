@@ -13,10 +13,13 @@ public class entity : MonoBehaviour
 	public bool moving = false;
 	public virtual void move(Transform t, int indx){ //player move
 		if(Vector3.Distance(transform.position,t.position) < 1.67f){
-			if(Vector3.Distance(t.position,transform.position) > 0.1f)master.MR.hideallitems();
-			moving = true;
-			anim.SetBool("move", true);
-			StartCoroutine(move2(t,indx)); //move over time
+			Collider[] cols = Physics.OverlapSphere(t.position, 0.25f, master.MR.entitymask);
+			if(cols.Length == 0 || cols[0].transform.parent.parent == this.transform){
+				if(Vector3.Distance(t.position,transform.position) > 0.1f)master.MR.hideallitems();
+				moving = true;
+				anim.SetBool("move", true);
+				StartCoroutine(move2(t,indx)); //move over time
+			}
 		}
 	}
 	

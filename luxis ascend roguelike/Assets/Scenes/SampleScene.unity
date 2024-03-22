@@ -283,6 +283,9 @@ MonoBehaviour:
   wallonlymask:
     serializedVersion: 2
     m_Bits: 1
+  entitymask:
+    serializedVersion: 2
+    m_Bits: 64
   hpscaler: {fileID: 1012353105}
   manascaler: {fileID: 1751626975}
   hptxt: {fileID: 1258735724}

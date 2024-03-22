@@ -137,6 +137,42 @@ public class mapgen : MonoBehaviour
 					}
 					yield return new WaitForEndOfFrame();		
 			}
+			//deco
+			foreach(Transform c5 in c.GetChild(3)){
+				Transform clone2 = Instantiate(themes[whattheme].deco[Random.Range(0,themes[whattheme].deco.Count)]);
+				clone2.parent = c5;
+				clone2.position = c5.position + new Vector3(0,0.5f,0);
+			}
+			//enemies
+			foreach(Transform c6 in c.GetChild(4)){
+				List<Transform> templst = new List<Transform>();
+				switch(c6.gameObject.tag){
+					case "1":
+						templst = themes[whattheme].enemy_melee;
+						break;
+					case "2":
+						templst = themes[whattheme].enemy_ranged;
+						break;
+					case "3":
+						templst = themes[whattheme].enemy_heavy;
+						break;
+					case "4":
+						templst = themes[whattheme].enemy_magic;
+						break;
+					case "5":
+						templst = themes[whattheme].enemy_fast;
+						break;
+					default:
+						Debug.Log("UNTAGGED ENEMY IN" + c6.parent);
+						break;
+				}
+				if(templst.Count != 0){
+					Transform clone2 = Instantiate(templst[Random.Range(0,templst.Count)]);
+					clone2.parent = c6;
+					clone2.position = c6.position;
+					clone2.parent = master.MR.entrans;
+				}
+			}
 			yield return new WaitForEndOfFrame();
 		}
 	}
