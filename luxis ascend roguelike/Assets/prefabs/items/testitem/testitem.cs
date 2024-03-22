@@ -11,11 +11,14 @@ public class testitem : item
 		}
 		else{
 				Debug.Log("slash!");
-					foreach(Transform t2 in master.MR.entrans){
-						if(Vector3.Distance(t.position, t2.position) <= 0.1f){
-							t2.GetComponent<entity>().takedamage(damage,0);
-							removedurability(1);
+					Collider[] cols = Physics.OverlapSphere(t.position, 0.25f, master.MR.entitymask);
+					foreach(Collider c in cols){
+						if(c.transform.parent.parent.GetComponent<entity>()){
+							c.transform.parent.parent.GetComponent<entity>().takedamage(damage,0);
 						}
+					}
+					if(cols.Length != 0){
+						removedurability(1);
 					}
 					master.MR.state = 0;
 					master.MR.clickevent = null;

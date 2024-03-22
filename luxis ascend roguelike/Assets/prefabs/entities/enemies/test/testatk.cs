@@ -22,10 +22,12 @@ public class testatk : attack
 	}
 	
 	public override IEnumerator doatk2(Vector3 targ, entity me, int indx){
-		foreach(Transform t2 in master.MR.entrans){
-			if(Vector3.Distance(targ, t2.position) <= 0.1f)t2.GetComponent<entity>().takedamage(1,0);
+		Collider[] cols = Physics.OverlapSphere(visuse.position, 0.25f, master.MR.entitymask);
+		foreach(Collider c in cols){
+			if(c.transform.parent.parent.GetComponent<entity>()){
+				c.transform.parent.parent.GetComponent<entity>().takedamage(1,0);
+			}
 		}
-		if(Vector3.Distance(targ, player.pc.transform.position) <= 0.1f)player.pc.takedamage(1,0);
 		Destroy(visuse.gameObject);
 		me.anim.SetBool("attack",true);
 		yield return new WaitUntil(() => !me.anim.GetBool("attack"));

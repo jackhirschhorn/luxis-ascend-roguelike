@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64bd60c2def48dc4c92e7d5da4db1371, type: 3}
+  m_Name: testbrain 1
+  m_EditorClassIdentifier: 
+  targ: {fileID: 0}
+  vtarg: {x: 0, y: 0, z: 0}
+  state: 0
+  sens:
+  - {fileID: 11400000, guid: e75af82d2f076a64a998b053c1fd2a90, type: 2}
+  atks:
+  - {fileID: 11400000, guid: 8eb8adc60d37d99419075751c85de80a, type: 2}
+  pf: {fileID: 11400000, guid: 6994a96738aeb644aa6c0294e8ea0e0a, type: 2}
+  me: {fileID: 0}
+  hit: {fileID: 0}
+  activated: 1

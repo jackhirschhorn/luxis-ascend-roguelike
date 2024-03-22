@@ -50,13 +50,11 @@ public class testcleaveatk : attack
 	
 	public override IEnumerator doatk2(Vector3 targ, entity me, int indx){
 		for(int i = 0; i < visuse.Count; i++){
-			foreach(Transform t2 in master.MR.entrans){
-				if(i < visuse.Count && Vector3.Distance(visuse[i].position, t2.position) <= 0.11f){
-					t2.GetComponent<entity>().takedamage(1,0);
+			Collider[] cols = Physics.OverlapSphere(visuse[i].position, 0.25f, master.MR.entitymask);
+			foreach(Collider c in cols){
+				if(c.transform.parent.parent.GetComponent<entity>()){
+					c.transform.parent.parent.GetComponent<entity>().takedamage(1,0);
 				}
-			}
-			if(i < visuse.Count && Vector3.Distance(visuse[i].position, player.pc.transform.position) <= 0.11f){
-				player.pc.takedamage(1,0);
 			}
 		}
 		for (int i = visuse.Count - 1; i >= 0; i--){

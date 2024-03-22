@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName ="testrangedatk")]
 public class testrangedatk : attack
@@ -27,20 +28,28 @@ public class testrangedatk : attack
 			tempvisuse.position = new Vector3(Mathf.FloorToInt(tempv.x+0.5f),0.1f,Mathf.FloorToInt(tempv.z+0.5f));//Space it sends to
 			visuse.Add(tempvisuse); //temporarily adds the thingies
 		}
-		
+		List<Transform> temps = new List<Transform>();
+		List<Transform> temps2 = new List<Transform>();
+		foreach(Transform t in visuse){
+			if(!temps.Any(f => (f != t && Vector3.Distance(t.position,f.position) <0.1f))){
+				temps.Add(t);
+			} else {
+				temps2.Add(t);
+			}
+		}
+		for(int i2 = temps2.Count-1; i2 >=0; i2--){
+			Destroy(temps2[i2].gameObject);
+		}
+		visuse = temps;
 	}
 	
 	public override IEnumerator doatk2(Vector3 targ, entity me, int indx){
 		for(int i = 0; i < visuse.Count; i++){
-			foreach(Transform t2 in master.MR.entrans){
-				if(i < visuse.Count && Vector3.Distance(visuse[i].position, t2.position) <= 0.11f){
-					t2.GetComponent<entity>().takedamage(1,0);
-					i = visuse.Count;
+			Collider[] cols = Physics.OverlapSphere(visuse[i].position, 0.25f, master.MR.entitymask);
+			foreach(Collider c in cols){
+				if(c.transform.parent.parent.GetComponent<entity>()){
+					c.transform.parent.parent.GetComponent<entity>().takedamage(1,0);
 				}
-			}
-			if(i < visuse.Count && Vector3.Distance(visuse[i].position, player.pc.transform.position) <= 0.11f){
-				i = visuse.Count;
-				player.pc.takedamage(1,0);
 			}
 		}
 		for (int i = visuse.Count - 1; i >= 0; i--){
