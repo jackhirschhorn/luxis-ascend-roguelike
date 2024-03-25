@@ -74,6 +74,8 @@ public class mapgen : MonoBehaviour
 				yield return new WaitForEndOfFrame();					
 			} while (!free);
 		}
+		Debug.Log("started");
+		
 		//populate rooms
 		foreach(Transform c in map){
 			//doors
@@ -176,5 +178,6 @@ public class mapgen : MonoBehaviour
 			}
 			yield return new WaitForEndOfFrame();
 		}
+		Time.timeScale = 1f;
 	}
 }

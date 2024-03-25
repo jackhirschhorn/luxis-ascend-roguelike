@@ -36,6 +36,7 @@ public class master : MonoBehaviour
 	
 	public void Awake(){
 		MR = this;
+		Time.timeScale = 0.01f;
 	}
 	
 	public void Start(){
@@ -68,7 +69,7 @@ public class master : MonoBehaviour
 		while(i >= 100){
 			clone = Instantiate(gold100);
 			clone.parent = itementholder;
-			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(3,20)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
 			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i -= 100;
@@ -76,7 +77,7 @@ public class master : MonoBehaviour
 		while(i >= 10){
 			clone = Instantiate(gold10);
 			clone.parent = itementholder;
-			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(3,20)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
 			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i -= 10;
@@ -84,7 +85,7 @@ public class master : MonoBehaviour
 		while(i >= 1){
 			clone = Instantiate(gold1);
 			clone.parent = itementholder;
-			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f);
+			clone.position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(3,20)*0.03f,Random.Range(-10,10)*0.03f);
 			clone.rotation = Random.rotation;
 			clone.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			i--;
@@ -95,7 +96,7 @@ public class master : MonoBehaviour
 		foreach(Transform t in loot){
 			Transform clone = Instantiate(t);
 			clone.parent = itementholder;
-			clone.GetChild(1).position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f+0.5f,Random.Range(-10,10)*0.03f);
+			clone.GetChild(1).position = pos + new Vector3(Random.Range(-10,10)*0.03f,Random.Range(0,20)*0.03f+0.5f,Random.Range(-10,10)*0.03f);
 			clone.GetChild(1).rotation = Random.rotation;
 			clone.GetChild(1).GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f,Random.Range(-10,10)*0.03f));
 			
