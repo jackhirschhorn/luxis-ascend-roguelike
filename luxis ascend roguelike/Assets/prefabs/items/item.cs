@@ -134,9 +134,11 @@ public class item : MonoBehaviour
 			if(master.MR.clickevent == thisevent){
 				master.MR.state = 0;
 				master.MR.clickevent = null;
+				master.MR.itseld = null;
 			} else {
 				master.MR.state = 1;
 				master.MR.clickevent = thisevent;
+				master.MR.itseld = this;
 			}
 		}
 	}
@@ -145,10 +147,11 @@ public class item : MonoBehaviour
 		
 	}
 	
-	public void punch(Transform t){
+	public void punch(Transform t, item it){
 		if(Vector3.Distance(t.position,player.pc.transform.position)<0.1f || Vector3.Distance(t.position,player.pc.transform.position)>1.5f){
 			master.MR.state = 0;
 			master.MR.clickevent = null;	
+			master.MR.itseld = null;
 		}
 		else{
 			Debug.Log("punch!");
@@ -160,6 +163,7 @@ public class item : MonoBehaviour
 			}
 			master.MR.state = 0;
 			master.MR.clickevent = null;
+			master.MR.itseld = null;
 			master.MR.doenemyturn(0);
 		}
 	}

@@ -10,6 +10,7 @@ public class master : MonoBehaviour
     public static master MR;
 	public int state = 0;//0 = move, 1 = item
 	public UEvent clickevent;
+	public item itseld;
 	public LayerMask wallonlymask;
 	public LayerMask entitymask;
 	public RectTransform hpscaler, manascaler;
@@ -49,7 +50,7 @@ public class master : MonoBehaviour
 			if(state == 0){
 				player.pc.move(t,0);
 			} else if(state == 1){
-				clickevent.Invoke(t);
+				clickevent.Invoke(t, itseld);
 			}
 		}
 	}
@@ -275,7 +276,7 @@ public class master : MonoBehaviour
 }
 
 [System.Serializable]
-public class UEvent : UnityEvent<Transform>
+public class UEvent : UnityEvent<Transform, item>
 {
 }
 

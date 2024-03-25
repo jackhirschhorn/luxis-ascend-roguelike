@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class testitem : item
 {	
-    public void swing(Transform t){
+    public void swing(Transform t, item it){
 		if(Vector3.Distance(t.position,player.pc.transform.position)<0.1f || Vector3.Distance(t.position,player.pc.transform.position)>1.5f){
 			master.MR.state = 0;
-			master.MR.clickevent = null;	
+			master.MR.clickevent = null;
+			master.MR.itseld = null;			
 		}
 		else{
 				Debug.Log("slash!");
@@ -22,6 +23,7 @@ public class testitem : item
 					}
 					master.MR.state = 0;
 					master.MR.clickevent = null;
+					master.MR.itseld = null;
 					master.MR.doenemyturn(0);
 				}
 	}
