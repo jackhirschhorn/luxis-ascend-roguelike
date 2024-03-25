@@ -20,6 +20,7 @@ public class mapgen : MonoBehaviour
 	public IEnumerator generatefloor(){
 		yield return new WaitForEndOfFrame();
 		//generate start room
+		Time.timeScale = 1f;
 		Transform clone = Instantiate(saferoom);
 		clone.parent = map;
 		clone.position = new Vector3(0,0,0);
@@ -74,7 +75,6 @@ public class mapgen : MonoBehaviour
 				yield return new WaitForEndOfFrame();					
 			} while (!free);
 		}
-		Debug.Log("started");
 		
 		//populate rooms
 		foreach(Transform c in map){
@@ -178,6 +178,5 @@ public class mapgen : MonoBehaviour
 			}
 			yield return new WaitForEndOfFrame();
 		}
-		Time.timeScale = 1f;
 	}
 }
