@@ -25,11 +25,12 @@ public class backpack : item
 		transform.parent = itmref.transform.parent;
 	}
 	
-    public void togglepack(){
+    public void togglepack(){		
 		on = !on;
 		if(on && transform.parent == master.MR.inv){ // open
 			transform.GetChild(0).gameObject.SetActive(true);
 		} else {
+			on = false;
 			transform.GetChild(0).gameObject.SetActive(false);
 		}
 	}

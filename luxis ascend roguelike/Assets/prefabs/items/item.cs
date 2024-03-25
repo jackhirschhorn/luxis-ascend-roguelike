@@ -87,16 +87,45 @@ public class item : MonoBehaviour
 				master.MR.waspicked = false;
 				Transform clone = master.MR.itemup.transform;
 				if(clone.parent != transform.parent){
+					int temp2 = this.transform.GetSiblingIndex();
+					Vector2 tempv2 = (this.transform as RectTransform).anchoredPosition;
 					if(clone.parent.name == "inv"){ //from backpack
-						int temp = clone.GetSiblingIndex();
-						Transform tempt = clone.parent.parent.parent;
-						clone.parent = transform.parent;
-						tempt.GetComponent<backpack>().replaceslot(temp);
+						if(nme == ""){
+							int temp = clone.GetSiblingIndex();
+							Transform tempt = clone.parent.parent.parent;
+							clone.parent = transform.parent;						
+							tempt.GetComponent<backpack>().replaceslot(temp);
+						} else {
+							Transform tempt = clone.parent;
+							int temp = clone.GetSiblingIndex();
+							Vector2 v22 = (clone as RectTransform).anchoredPosition;
+							clone.parent = transform.parent;
+							transform.parent = tempt;
+							transform.SetSiblingIndex(temp);
+							(this.transform as RectTransform).anchoredPosition = v22;
+						}
 					} else {
-						clone.parent = transform.parent;
+						if(transform.parent.name == "inv"){ //empty backpack slot
+							if(nme == ""){
+								int temp = clone.GetSiblingIndex();
+								Transform tempt = clone.parent;								
+								clone.parent = transform.parent;
+								if(tempt == master.MR.inv)master.MR.addinvitem(temp);
+							} else {
+								Transform tempt = clone.parent;
+								int temp = clone.GetSiblingIndex();
+								Vector2 v22 = (clone as RectTransform).anchoredPosition;
+								clone.parent = transform.parent;
+								transform.parent = tempt;
+								transform.SetSiblingIndex(temp);
+								(this.transform as RectTransform).anchoredPosition = v22;
+							}
+						} else {
+							clone.parent = transform.parent;
+						}
 					}
-					clone.SetSiblingIndex(this.transform.GetSiblingIndex()+1);
-					(clone as RectTransform).anchoredPosition = (this.transform as RectTransform).anchoredPosition;
+					clone.SetSiblingIndex(temp2+1);
+					(clone as RectTransform).anchoredPosition = tempv2;
 					master.MR.itemup.itmref.transform.parent.gameObject.SetActive(false);
 					yield return new WaitForEndOfFrame();
 					master.MR.restackpickups();
@@ -105,8 +134,12 @@ public class item : MonoBehaviour
 					if(nme == ""){
 						Destroy(this.gameObject);
 					} else {
-						dropitem();
-						//drop item
+						if(clone.parent.name == "inv" || transform.parent.name == "inv"){
+							
+						} else {
+							dropitem();
+							//drop item
+						}
 					}
 				} else {
 					int tempindx = this.transform.GetSiblingIndex();
