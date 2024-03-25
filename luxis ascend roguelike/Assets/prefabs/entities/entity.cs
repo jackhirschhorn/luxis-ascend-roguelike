@@ -65,14 +65,14 @@ public class entity : MonoBehaviour
 	}
 	
 	public void heal(int whatstat, int howmuch){
-	switch(whatstat){
-						case 0:
-						chp = Mathf.Min((howmuch + chp),hp);//heals
-						break;
-						case 1:
-						cmana = Mathf.Min((howmuch + cmana),mana);//mana
-						break;
-						}
+		switch(whatstat){
+			case 0:
+				chp = Mathf.Min(howmuch + chp,hp);//heals
+				break;
+			case 1:
+				cmana = Mathf.Min(howmuch + cmana,mana);//mana
+				break;
+		}
 	}
 	
 	public virtual void takedamage(int dam, int peirce){
