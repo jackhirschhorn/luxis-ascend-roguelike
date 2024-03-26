@@ -19,7 +19,19 @@ public class entity : MonoBehaviour
 				moving = true;
 				anim.SetBool("move", true);
 				StartCoroutine(move2(t,indx)); //move over time
+				StartCoroutine(movecamera(t));
 			}
+		}
+	}
+	
+	public virtual IEnumerator movecamera(Transform t){
+		float timer = 0f;
+		Vector3 startpos = transform.position;
+		Vector3 endpos = t.position;
+		while(timer < 1){
+			timer += Time.deltaTime*3f;
+			Camera.main.transform.parent.position = Vector3.Lerp(startpos,t.position,timer);
+			yield return new WaitForEndOfFrame();
 		}
 	}
 	

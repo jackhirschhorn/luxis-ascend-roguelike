@@ -8,6 +8,7 @@ public class enemy : entity
 	public string name;
 	public Transform[] loot = new Transform[0];
 	public int gold;
+	public roomcontrol rc;
 	
 	public virtual void Awake(){
 		brn = Instantiate(brn);
@@ -25,6 +26,7 @@ public class enemy : entity
 		//Destroy(this.gameObject);
 		dead = true;
 		master.MR.diecall += base.die;
+		rc.clearroom(this);
 	}
 	
 }

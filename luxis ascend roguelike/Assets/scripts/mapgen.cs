@@ -29,8 +29,7 @@ public class mapgen : MonoBehaviour
 		while(curfloorsize < floorsize){
 			yield return new WaitForEndOfFrame();
 			yield return new WaitForEndOfFrame();
-			clone = Instantiate(rooms[Random.Range(0,rooms.Count)]);
-			clone.position = new Vector3(0,-10,0);
+			clone = Instantiate(rooms[Random.Range(0,rooms.Count)],new Vector3(0,-30,0),rooms[Random.Range(0,rooms.Count)].rotation);
 			int rando1 = Random.Range(2,5);
 			Vector2 connectfind = clone.GetComponent<roomgrid>().findcell(rando1);
 			while(connectfind == new Vector2(10,10)){
@@ -98,6 +97,7 @@ public class mapgen : MonoBehaviour
 							clone2.position = c.position+(vecpar+(veccheck[i]-vecpar)/2);
 							//rotate door model
 							if(vecpar.x != veccheck[i].x)clone2.rotation = Quaternion.Euler(0,90,0);
+							c.GetComponent<roomcontrol>().doors.Add(clone2.GetChild(2).GetComponent<door>());
 						}
 					}
 				}
@@ -174,6 +174,8 @@ public class mapgen : MonoBehaviour
 					clone2.parent = c6;
 					clone2.position = c6.position;
 					clone2.parent = master.MR.entrans;
+					clone2.GetComponent<enemy>().rc = c.GetComponent<roomcontrol>();
+					c.GetComponent<roomcontrol>().enmy.Add(clone2.GetComponent<enemy>());
 				}
 			}
 			yield return new WaitForEndOfFrame();
