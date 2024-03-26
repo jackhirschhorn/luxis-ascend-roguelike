@@ -96,7 +96,12 @@ public class mapgen : MonoBehaviour
 							clone2.parent = c.GetChild(1);
 							clone2.position = c.position+(vecpar+(veccheck[i]-vecpar)/2);
 							//rotate door model
-							if(vecpar.x != veccheck[i].x)clone2.rotation = Quaternion.Euler(0,90,0);
+							Debug.Log(vecpar + " " + veccheck[i] + " " + (vecpar.y < veccheck[i].y?3:1));
+							if(vecpar.x < veccheck[i].x+0.05f && vecpar.x > veccheck[i].x-0.05f){
+								clone2.rotation = Quaternion.Euler(0,90*(vecpar.y < veccheck[i].y?2:0),0);
+							} else {
+								clone2.rotation = Quaternion.Euler(0,90*(vecpar.x < veccheck[i].x?1:3),0);
+							}
 							c.GetComponent<roomcontrol>().doors.Add(clone2.GetChild(2).GetComponent<door>());
 						}
 					}
