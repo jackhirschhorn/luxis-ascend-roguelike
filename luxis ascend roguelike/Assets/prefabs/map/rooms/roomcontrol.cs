@@ -25,6 +25,7 @@ public class roomcontrol : MonoBehaviour
 			}
 			foreach(enemy e in enmy){
 				e.gameObject.SetActive(true);
+				e.brn.activated = true;
 			}
 		} else {
 			foreach(door d in doors){
