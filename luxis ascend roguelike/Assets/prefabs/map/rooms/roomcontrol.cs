@@ -21,10 +21,18 @@ public class roomcontrol : MonoBehaviour
 			canv.SetActive(true);
 			foreach(door d in doors){
 				d.gameObject.SetActive((cleared?false:true));
+				d.transform.parent.GetChild(3).gameObject.SetActive(true);
+			}
+			foreach(enemy e in enmy){
+				e.gameObject.SetActive(true);
 			}
 		} else {
 			foreach(door d in doors){
 				d.gameObject.SetActive(false);
+				d.transform.parent.GetChild(3).gameObject.SetActive(false);
+			}
+			foreach(enemy e in enmy){
+				e.gameObject.SetActive(false);
 			}
 		}
 	}
