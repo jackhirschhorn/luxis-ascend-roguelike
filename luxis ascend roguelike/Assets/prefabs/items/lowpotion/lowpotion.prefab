@@ -342,7 +342,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 454821dc7eaa51848ab7a9e058430003, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52ef095d8bd8e2448875caecee1f96e0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6e2b1d7aec71249a8316ef7a2e7556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nme: 
+  nme: lowpotion
   damage: -1
   durability: 1
   goldcost: 3
