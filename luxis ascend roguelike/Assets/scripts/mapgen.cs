@@ -184,5 +184,8 @@ public class mapgen : MonoBehaviour
 			}
 			yield return new WaitForEndOfFrame();
 		}
+		foreach(Transform c in map){
+			c.GetComponent<roomcontrol>().go = true;
+		}
 	}
 }

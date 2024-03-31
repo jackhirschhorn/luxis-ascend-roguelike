@@ -9,10 +9,11 @@ public class roomcontrol : MonoBehaviour
 	public GameObject canv;
 	public bool active = false;
 	public bool cleared = false;
+	public bool go = false;
 	
 	public IEnumerator Start(){
 		canv.SetActive(false);		
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitUntil(() => go);
 		checkroom();
 	}
 	
