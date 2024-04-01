@@ -25,6 +25,15 @@ public class item : MonoBehaviour
 		}
 	}
 	
+	public void LateUpdate(){
+		if(damage != -1){
+			transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+damage;
+			transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = ""+durability;
+		} else if (durability != -1) {
+			transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+durability;
+		}
+	}
+	
 	public virtual void removedurability(int i){
 		if(durability != -1){
 			durability -= i;
@@ -36,6 +45,11 @@ public class item : MonoBehaviour
 	
 	public virtual void breakthis(){
 		Debug.Log(nme + " broke!");
+		int temp = transform.GetSiblingIndex();
+		transform.parent = null;
+		master.MR.addinvitem(temp);
+		Destroy(itmref.gameObject);
+		Destroy(this.gameObject);
 	}
 	
 	public virtual void ondrag(){
