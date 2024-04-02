@@ -174,6 +174,9 @@ public class item : MonoBehaviour
 		itmref.transform.parent.gameObject.SetActive(true);
 		itmref.transform.parent.GetChild(1).position = player.pc.transform.position;
 		transform.parent = itmref.transform.parent;
+		master.MR.state = 0;
+		master.MR.clickevent = null;
+		master.MR.itseld = null;
 	}
 	
 	public virtual void dothething(){
