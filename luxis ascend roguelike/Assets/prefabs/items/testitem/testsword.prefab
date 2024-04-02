@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 7040689882989972462}
   - component: {fileID: -8483552805064100909}
   - component: {fileID: 6321421183037473158}
+  - component: {fileID: -1165331168441996840}
   m_Layer: 0
   m_Name: testsword
   m_TagString: Untagged
@@ -434,6 +435,18 @@ MonoBehaviour:
             m_StringArgument: Highlighted
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: -1165331168441996840}
+          m_TargetAssemblyTypeName: itemrangefinder, Assembly-CSharp
+          m_MethodName: showrange
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
   - eventID: 1
     callback:
       m_PersistentCalls:
@@ -448,6 +461,18 @@ MonoBehaviour:
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: Normal
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: -1165331168441996840}
+          m_TargetAssemblyTypeName: itemrangefinder, Assembly-CSharp
+          m_MethodName: showrange
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
   - eventID: 4
@@ -465,6 +490,18 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: Normal
             m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: -1165331168441996840}
+          m_TargetAssemblyTypeName: itemrangefinder, Assembly-CSharp
+          m_MethodName: showrange3
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
           m_CallState: 2
   - eventID: 13
     callback:
@@ -498,3 +535,18 @@ MonoBehaviour:
             m_StringArgument: Normal
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &-1165331168441996840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7324991721620739343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9e8422768db9243bae775b53db740e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 5891403072736738467, guid: f78ff48ba8415a2449dbb9a073442787, type: 3}
+  fabs: []
+  active: 0

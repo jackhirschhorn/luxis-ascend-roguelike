@@ -51,6 +51,7 @@ public class master : MonoBehaviour
 			if(state == 0){
 				player.pc.move(t,0);
 			} else if(state == 1){
+				if(itseld.transform.GetComponent<itemrangefinder>())itseld.transform.GetComponent<itemrangefinder>().showrange4();
 				clickevent.Invoke(t, itseld);
 			}
 		}
