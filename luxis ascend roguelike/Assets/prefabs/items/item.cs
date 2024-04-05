@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Animations;
 
 public class item : MonoBehaviour
 {
@@ -23,6 +24,13 @@ public class item : MonoBehaviour
 		} else if (durability != -1) {
 			transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = ""+durability;
 		}
+	}
+	
+	public void Start(){
+		ConstraintSource cs = new ConstraintSource();
+		cs.sourceTransform = master.MR.canvasscaler;
+		cs.weight = 1;
+		transform.GetComponent<ScaleConstraint>().SetSource(0,cs);
 	}
 	
 	public void LateUpdate(){

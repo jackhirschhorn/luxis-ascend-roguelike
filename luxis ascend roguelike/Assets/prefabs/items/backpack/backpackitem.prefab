@@ -232,13 +232,29 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 2721007986507785540}
     m_Modifications:
+    - target: {fileID: 299869045107988521, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_Pivot.y
+      value: -0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 299869045107988521, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854789804487476775, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_Pivot.y
+      value: -0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 1854789804487476775, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6913439723667905776, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6913439723667905776, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: -0.104
       objectReference: {fileID: 0}
     - target: {fileID: 6913439723667905776, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_RootOrder
@@ -302,7 +318,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6913439723667905776, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 58
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6913439723667905776, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -319,6 +335,14 @@ PrefabInstance:
     - target: {fileID: 6913439723667905777, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
       propertyPath: m_Name
       value: backpack
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438956536165883096, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_Pivot.y
+      value: -0.104
+      objectReference: {fileID: 0}
+    - target: {fileID: 7438956536165883096, guid: 2fef2a08f151dcc4cbd5be7cd368cc25, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

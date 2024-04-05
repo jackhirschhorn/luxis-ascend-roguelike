@@ -83,7 +83,7 @@ public class backpack : item
 		int temp = inv.childCount+1;
 		for(int i = inv.childCount-1; i > -1; i--){
 			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
-			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(35*((i*2)+1),51);
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(35*((i*2)+1),0);
 		}
 	}
 }

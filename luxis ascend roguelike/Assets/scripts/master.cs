@@ -20,6 +20,7 @@ public class master : MonoBehaviour
 	public bool canmove = true;
 	public delegate void dielegate();
 	public dielegate diecall;
+	public Transform canvasscaler;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -43,6 +44,8 @@ public class master : MonoBehaviour
 		for(int i = 0; i < player.pc.inventorysize; i++){
 			addinvitem(true);
 		}
+		float temp = Screen.width/1280f;
+		canvasscaler.localScale = new Vector3(temp,temp,temp);
 	}
 	
 	public void tileclick(Transform t){
@@ -148,11 +151,10 @@ public class master : MonoBehaviour
 		RectTransform clone = Instantiate(invitempre as RectTransform);
 		clone.parent = inv;
 		int temp = inv.childCount+1;
-		clone.anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),58);
-		StartCoroutine(animateinv(clone,new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,58),0));
+		clone.anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),0);
+		StartCoroutine(animateinv(clone,new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,0),0));
 		for(int i = inv.childCount-2; i > -1; i--){
-			StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),inv.childCount-i+5));
-			//(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2(Screen.width*((i+1f)/temp),58);
+			StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,0),inv.childCount-i+5));
 		}
 		
 	}
@@ -162,8 +164,7 @@ public class master : MonoBehaviour
 		clone.parent = inv;
 		int temp = inv.childCount+1;
 		for(int i = inv.childCount-1; i > -1; i--){
-			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
-			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58);
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,0);
 		}
 		
 	}
@@ -174,8 +175,7 @@ public class master : MonoBehaviour
 		clone.SetSiblingIndex(i2);
 		int temp = inv.childCount+1;
 		for(int i = inv.childCount-1; i > -1; i--){
-			//StartCoroutine(animateinv((inv.GetChild(i) as RectTransform),new Vector2(Screen.width*((i+1f)/temp),58),inv.childCount-i+5));
-			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58);
+			(inv.GetChild(i) as RectTransform).anchoredPosition = new Vector2((Screen.width*((i+1f)/temp))*0.9095f,0);
 		}
 		
 	}
@@ -209,10 +209,10 @@ public class master : MonoBehaviour
 		itm.parent = worlditemholder;
 		itm.gameObject.SetActive(true);
 		int temp = worlditemholder.childCount+1;
-		(itm as RectTransform).anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),58);
-		StartCoroutine(animateinv((itm as RectTransform),new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,58),0));
+		(itm as RectTransform).anchoredPosition = new Vector2(Screen.width*((temp+1f)/temp),0);
+		StartCoroutine(animateinv((itm as RectTransform),new Vector2((Screen.width*((temp-1f)/temp))*0.9095f,0),0));
 		for(int i = worlditemholder.childCount-2; i > -1; i--){
-			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
+			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,0),worlditemholder.childCount-i+5));
 		}	
 	}
 		
