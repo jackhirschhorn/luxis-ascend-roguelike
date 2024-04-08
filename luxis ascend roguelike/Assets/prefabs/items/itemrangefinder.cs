@@ -7,9 +7,11 @@ public class itemrangefinder : MonoBehaviour
 	public Transform prefab;
 	public List<Transform> fabs = new List<Transform>();
 	public bool active = false;
+	public bool showtooltip = false;
 	
 	public virtual void showrange(bool b){ //standard melee
 		StartCoroutine(showrange2(b));
+		if(showtooltip && transform.parent == master.MR.inv)master.MR.showtooltip(transform.GetComponent<item>(),b);
 	}
 	
 	public virtual void showrange3(){

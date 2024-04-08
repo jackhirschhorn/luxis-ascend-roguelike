@@ -9,6 +9,7 @@ using UnityEngine.Animations;
 public class item : MonoBehaviour
 {
     public string nme;
+	public string desc;
 	public int damage = 0;
 	public int durability = 0;
 	public int goldcost = 0;

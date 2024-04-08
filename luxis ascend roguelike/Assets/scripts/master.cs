@@ -21,6 +21,8 @@ public class master : MonoBehaviour
 	public delegate void dielegate();
 	public dielegate diecall;
 	public Transform canvasscaler;
+	public Transform tooltip;
+	public TextMeshProUGUI tttitle,tttext;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -274,6 +276,25 @@ public class master : MonoBehaviour
 			temp += v2.karmavalue;
 		}
 		vownum.text = temp+"";
+	}
+	
+	public bool showtip = false;
+	
+	public void showtooltip(item i, bool b){
+		showtip = b;
+		if(b)StartCoroutine(showtooltip2(i));
+	}
+	
+	public IEnumerator showtooltip2(item i){
+		yield return new WaitForSeconds(1);
+		if(showtip){
+			tooltip.gameObject.SetActive(true);
+			tttitle.text = i.nme;
+			tttext.text = i.desc;
+		}
+		yield return new WaitUntil(() => !showtip);
+			tooltip.gameObject.SetActive(false);
+		
 	}
 }
 
