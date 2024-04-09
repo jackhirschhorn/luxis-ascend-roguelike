@@ -18,6 +18,7 @@ public class entity : MonoBehaviour
 				if(Vector3.Distance(t.position,transform.position) > 0.1f)master.MR.hideallitems();
 				moving = true;
 				anim.SetBool("move", true);
+				master.MR.onmove_player1();
 				StartCoroutine(move2(t,indx)); //move over time
 				StartCoroutine(movecamera(t));
 			}
@@ -30,7 +31,7 @@ public class entity : MonoBehaviour
 		Vector3 endpos = t.position;
 		while(timer < 1){
 			timer += Time.deltaTime*3f;
-			Camera.main.transform.parent.position = Vector3.Lerp(startpos,t.position,timer);
+			Camera.main.transform.parent.parent.position = Vector3.Lerp(startpos,t.position,timer);
 			yield return new WaitForEndOfFrame();
 		}
 	}

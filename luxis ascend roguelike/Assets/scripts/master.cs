@@ -239,10 +239,17 @@ public class master : MonoBehaviour
 		waspicked = true;
 	}
 	
+	public void onmove_player1(){
+		BroadcastMessage("onmove_player");
+	}
+	
+	public void onmove_player(){ //"waaa there's no reciever for the message"
+	}
+	
 	public void restackpickups(){
 		int temp = worlditemholder.childCount+1;
 		for(int i = worlditemholder.childCount-1; i > -1; i--){
-			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,58),worlditemholder.childCount-i+5));
+			StartCoroutine(animateinv((worlditemholder.GetChild(i) as RectTransform),new Vector2((Screen.width*((i+1f)/temp))*0.9095f,0),worlditemholder.childCount-i+5));
 		}
 	}
 	
