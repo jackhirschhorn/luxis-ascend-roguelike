@@ -23,6 +23,7 @@ public class master : MonoBehaviour
 	public Transform canvasscaler;
 	public Transform tooltip;
 	public TextMeshProUGUI tttitle,tttext;
+	public int basekarma = 0;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
@@ -278,7 +279,15 @@ public class master : MonoBehaviour
 	
 	public void addvow(vow v){
 		vows.Add(v);
-		int temp = 0;
+		int temp = basekarma;
+		foreach(vow v2 in vows){
+			temp += v2.karmavalue;
+		}
+		vownum.text = temp+"";
+	}
+	
+	public void showkarma(){
+		int temp = basekarma;
 		foreach(vow v2 in vows){
 			temp += v2.karmavalue;
 		}

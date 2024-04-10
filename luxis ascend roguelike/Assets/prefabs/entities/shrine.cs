@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class shrine : entity
 {
@@ -12,10 +13,20 @@ public class shrine : entity
 	
 	public bool shrineopen = false;
 	public GameObject UI;
+	public static int totalkarmabought = 1;
+	public static int totalvowsbought = 1;
+	public int goldcontained = 0;
+	public bool locked = false;
+	public TextMeshProUGUI gold1,gold2,gold3;
+	
+	public void Awake(){
+		goldcontained = Random.Range(25,100);
+	}
 	
 	public void openshrine(){
-		if(Vector3.Distance(transform.position,player.pc.transform.position) < 1.5f){
+		if(Vector3.Distance(transform.position,player.pc.transform.position) < 1.5f && !locked){
 			shrineopen = !shrineopen;
+			refreshUI();
 			UI.SetActive(shrineopen);
 			StartCoroutine(schmove());
 			
@@ -42,15 +53,51 @@ public class shrine : entity
 		StartCoroutine(schmove());
 	}
 	
+	public void refreshUI(){
+		gold1.text = (shrine.totalkarmabought*shrine.totalkarmabought*25)+"";
+		gold2.text = (shrine.totalvowsbought*shrine.totalvowsbought*100)+"";
+		gold3.text = goldcontained+"";
+	}
+	
 	public void buykarma(){
-		Debug.Log("karma +1");
+		if(!locked){
+			if(player.pc.gold >= shrine.totalkarmabought*shrine.totalkarmabought*25){
+				player.pc.gold -= shrine.totalkarmabought*shrine.totalkarmabought*25;
+				Debug.Log(player.pc.gold);
+				goldcontained += shrine.totalkarmabought*shrine.totalkarmabought*25;
+				shrine.totalkarmabought++;
+				master.MR.basekarma++;
+				master.MR.showkarma();
+				refreshUI();
+			} else {
+				Debug.Log("can't afford");
+			}
+		}
 	}
 	
 	public void buyvow(){
-		Debug.Log("vow +1");
+		if(!locked){
+			if(player.pc.gold >= shrine.totalvowsbought*shrine.totalvowsbought*100){
+				player.pc.gold -= shrine.totalvowsbought*shrine.totalvowsbought*100;
+				Debug.Log(player.pc.gold);
+				goldcontained += shrine.totalvowsbought*shrine.totalvowsbought*100;
+				shrine.totalvowsbought++;
+				karmachoose.kc.makenewchoice();
+				refreshUI();
+				onmove_player();
+			} else {
+				Debug.Log("can't afford");
+			}
+		}
 	}
 	
 	public void stealfrom(){
-		Debug.Log("evil +1");
+		player.pc.gold += goldcontained;
+		goldcontained = 0;
+		locked = true;
+		master.MR.basekarma -= 3;
+		master.MR.showkarma();
+		refreshUI();
+		onmove_player();
 	}
 }
