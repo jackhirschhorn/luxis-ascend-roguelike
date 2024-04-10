@@ -26,7 +26,6 @@ public class shrine : entity
 		Vector3 startpos = Camera.main.transform.parent.position;
 		Vector3 endpos = new Vector3((shrineopen?-2:0),0,0);
 		bool b = shrineopen;
-		Debug.Log(startpos + " " + endpos + " " + b);
 		float timer = 0;
 		while(timer < 1){			
 			Camera.main.transform.parent.position = Vector3.Lerp(startpos,endpos,timer);
@@ -41,5 +40,17 @@ public class shrine : entity
 		shrineopen = false;
 		UI.SetActive(false);
 		StartCoroutine(schmove());
+	}
+	
+	public void buykarma(){
+		Debug.Log("karma +1");
+	}
+	
+	public void buyvow(){
+		Debug.Log("vow +1");
+	}
+	
+	public void stealfrom(){
+		Debug.Log("evil +1");
 	}
 }
