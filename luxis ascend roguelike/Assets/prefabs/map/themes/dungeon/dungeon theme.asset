@@ -24,7 +24,8 @@ MonoBehaviour:
   - {fileID: 5309052251287286747, guid: 980a7ccb2b607324ca21a1c28048f13d, type: 3}
   wallconnectors:
   - {fileID: 7936010606229556932, guid: 0ba48923851678342ba71b7646d29229, type: 3}
-  deco: []
+  deco:
+  - {fileID: 4175656884600320800, guid: 73e889a3c732eb34bb2f86baffe41559, type: 3}
   enemy_melee:
   - {fileID: 6129108629396375580, guid: 47bd811d52e97b5458da82af0ee3dc93, type: 3}
   enemy_ranged:
