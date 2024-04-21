@@ -24,6 +24,7 @@ public class master : MonoBehaviour
 	public Transform tooltip;
 	public TextMeshProUGUI tttitle,tttext;
 	public int basekarma = 0;
+	public Transform npctextui;
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold

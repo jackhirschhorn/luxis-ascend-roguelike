@@ -897,6 +897,7 @@ MonoBehaviour:
   tttitle: {fileID: 1912607587}
   tttext: {fileID: 1297001528}
   basekarma: 0
+  npctextui: {fileID: 754765597}
   itementholder: {fileID: 1787325089}
   gold1: {fileID: 7161372531004344611, guid: f51c877280c26844eaf661b03335dd8a, type: 3}
   gold10: {fileID: 0}
