@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class testaxe : item
+public class testaxe : MonoBehaviour
 {	
     public void swing(Transform t, item it){
 		if(Vector3.Distance(t.position,player.pc.transform.position)<0.1f || Vector3.Distance(t.position,player.pc.transform.position)>1.5f){
@@ -33,11 +33,11 @@ public class testaxe : item
 					
 					foreach(Collider c in cols){
 						if(c.transform.parent.parent.GetComponent<entity>()){
-							c.transform.parent.parent.GetComponent<entity>().takedamage(damage,0);
+							c.transform.parent.parent.GetComponent<entity>().takedamage(it.damage,0);
 						}
 					}
 					if(cols.Length != 0){
-						removedurability(1);
+						it.removedurability(1);
 					}
 					master.MR.state = 0;
 					master.MR.clickevent = null;
