@@ -25,6 +25,14 @@ public class master : MonoBehaviour
 	public TextMeshProUGUI tttitle,tttext;
 	public int basekarma = 0;
 	public Transform npctextui;
+	public npcdialoguetree activenpcdialogue;
+	
+	public void npc_button(int i){
+		Debug.Log(i);
+		if(activenpcdialogue != null){
+			activenpcdialogue.button(i);
+		}
+	}
 	
 	public void FixedUpdate(){ 
 		//updates the UI to display players current HP, mana, and gold
