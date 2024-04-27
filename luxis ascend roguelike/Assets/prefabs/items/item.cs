@@ -16,6 +16,7 @@ public class item : MonoBehaviour
 	public itementity itmref;
 	public Sprite icon, blank;
 	public UEvent thisevent;
+	public npc_ent owner;
 	
 	public void Awake(){
 		if(icon == null)icon = transform.GetComponent<Image>().sprite;
@@ -174,14 +175,16 @@ public class item : MonoBehaviour
 					(clone as RectTransform).anchoredPosition = tempvec;
 					
 				}
+				if(clone.GetComponent<item>().owner != null)clone.GetComponent<item>().owner.onownedpickup(clone.GetComponent<item>());
 			}
 			
 		}
 	}
 	
 	public virtual void dropitem(){
+		if(owner != null)owner.onowneddrop(this);
 		itmref.transform.parent.gameObject.SetActive(true);
-		itmref.transform.parent.GetChild(1).position = player.pc.transform.position;
+		itmref.transform.parent.GetChild(1).position = player.pc.transform.position+new Vector3(0,0.5f,0);
 		transform.parent = itmref.transform.parent;
 		master.MR.state = 0;
 		master.MR.clickevent = null;

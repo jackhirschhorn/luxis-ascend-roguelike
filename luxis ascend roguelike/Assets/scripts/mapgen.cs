@@ -151,27 +151,36 @@ public class mapgen : MonoBehaviour
 				clone2.position = c5.position + new Vector3(0,0.5f,0);
 			}
 			//enemies
+			List<Transform> movelst = new List<Transform>();
 			foreach(Transform c6 in c.GetChild(4)){
 				List<Transform> templst = new List<Transform>();
-				switch(c6.gameObject.tag){
-					case "1":
-						templst = themes[whattheme].enemy_melee;
-						break;
-					case "2":
-						templst = themes[whattheme].enemy_ranged;
-						break;
-					case "3":
-						templst = themes[whattheme].enemy_heavy;
-						break;
-					case "4":
-						templst = themes[whattheme].enemy_magic;
-						break;
-					case "5":
-						templst = themes[whattheme].enemy_fast;
-						break;
-					default:
-						Debug.Log("UNTAGGED ENEMY IN" + c6.parent);
-						break;
+				if(c6.GetComponent<entity>()){ //preset entity
+					movelst.Add(c6);
+					if(!c6.GetComponent<npc_ent>()){ //preset enemy
+						c6.GetComponent<enemy>().rc = c.GetComponent<roomcontrol>();
+						c.GetComponent<roomcontrol>().enmy.Add(c6.GetComponent<enemy>());
+					}
+				} else {
+					switch(c6.gameObject.tag){
+						case "1":
+							templst = themes[whattheme].enemy_melee;
+							break;
+						case "2":
+							templst = themes[whattheme].enemy_ranged;
+							break;
+						case "3":
+							templst = themes[whattheme].enemy_heavy;
+							break;
+						case "4":
+							templst = themes[whattheme].enemy_magic;
+							break;
+						case "5":
+							templst = themes[whattheme].enemy_fast;
+							break;
+						default:
+							Debug.Log("UNTAGGED ENEMY IN" + c6.parent);
+							break;
+					}
 				}
 				if(templst.Count != 0){
 					Transform clone2 = Instantiate(templst[Random.Range(0,templst.Count)]);
@@ -181,6 +190,9 @@ public class mapgen : MonoBehaviour
 					clone2.GetComponent<enemy>().rc = c.GetComponent<roomcontrol>();
 					c.GetComponent<roomcontrol>().enmy.Add(clone2.GetComponent<enemy>());
 				}
+			}
+			for(int ii = movelst.Count-1; ii > -1; ii--){
+				movelst[ii].parent = master.MR.entrans;
 			}
 			yield return new WaitForEndOfFrame();
 		}

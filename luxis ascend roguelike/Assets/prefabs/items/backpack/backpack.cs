@@ -18,6 +18,7 @@ public class backpack : item
 	}
 	
 	public override void dropitem(){
+		if(owner != null)owner.onowneddrop(this);		
 		on = true;
 		togglepack();
 		itmref.transform.parent.gameObject.SetActive(true);
